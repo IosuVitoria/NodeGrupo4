@@ -8,7 +8,7 @@ const marketsRoutes = express.Router();
 marketsRoutes.get('/', getMarket);
 marketsRoutes.get('/id/:id', getMarketByID);
 marketsRoutes.post('/',postMarkets);
-marketsRoutes.put('/id/',putMarketProduct);
+marketsRoutes.put('/id/:id',putMarketProduct);
 marketsRoutes.delete('/:id',deleteMarket);
 marketsRoutes.put('/:id',putMarket);
 

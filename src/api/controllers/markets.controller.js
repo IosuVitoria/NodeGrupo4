@@ -62,7 +62,8 @@ const deleteMarket = async (req, res) => {
 const putMarketProduct = async (req, res) => {
     try {
         const { productId } = req.params;
-        const { marketId } = req.body;
+        const marketId = req.body._id;
+        console.log(req.body._id);
         const updatedMarket = await Market.findByIdAndUpdate(
             marketId,
             { $push: { products: productId } },
