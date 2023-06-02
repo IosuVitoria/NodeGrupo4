@@ -33,14 +33,13 @@ const postMarkets =  async (req, res) => {
         const newMarket = new Market({
             name,
             location,
-            products: product || [],
-            suppliers: supplier || []
+            products: products || [],
+            suppliers: suppliers || []
         });
-
         const createdMarket = await newMarket.save();
         return res.status(201).json(createdMarket);
     } catch (error) {
-        return next(error);
+        return res.status(500).json(error);
     }
 };
 
@@ -59,10 +58,11 @@ const deleteMarket = async (req, res) => {
     }
 };
 
-//Método PUT para cinema.
-const putMarket = async (req, res) => {
+//Método PUT para para introducir nuevos productos en el mercado.
+const putMarketProduct = async (req, res) => {
     try {
-        const { marketId, productId } = req.body;
+        const { productId } = req.params;
+        const { marketId } = req.body;
         const updatedMarket = await Market.findByIdAndUpdate(
             marketId,
             { $push: { products: productId } },
@@ -77,4 +77,18 @@ const putMarket = async (req, res) => {
     }
 };
 
-module.exports = {putMarket, postMarkets, deleteMarket, getMarketByID,getMarket};
+
+const putMarket = async (req, res) => {
+    try{
+     const {id} = req.params;
+     const putMarket = new Market (req.body);
+     putMarket._id = id;
+     const updatedMarket = await Market.findByIdAndUpdate(id, putMarket, {new: true});
+     return res.status(200).json(updatedMarket)
+    } catch (error){
+     return res.status(500).json(error)
+    }
+};
+ 
+
+module.exports = {putMarketProduct, postMarkets, deleteMarket, getMarketByID,getMarket, putMarket};

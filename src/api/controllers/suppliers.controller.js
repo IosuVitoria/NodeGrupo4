@@ -33,7 +33,7 @@ const postSupplier =  async (req, res) => {
         const { name, products, benefit } = req.body;
         const newSupplier = new Supplier({
             name,
-            products: product || [],
+            products: products || [],
             benefit
         });
 
