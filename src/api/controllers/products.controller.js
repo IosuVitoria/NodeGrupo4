@@ -4,7 +4,7 @@ const Product = require('../models/products.model');
 const getProductByID = async (req, res) =>{
     try {
         const {id} = req.params;
-        const product = await product.findById(id);
+        const product = await Product.findById(id);
         if(!product){
            return res.status(404).json({message: 'Not found product with that ID'}); 
         }
@@ -41,7 +41,7 @@ const postProduct = async (req, res) => {
 const deleteProduct = async(req, res) => {
     const {id} = req.params;
     try {
-        const deleteProduct = await product.findByIdAndDelete(id);
+        const deleteProduct = await Product.findByIdAndDelete(id);
         if(!deleteProduct){
             return res.status(404).json(`Message: ${'ID no reconocido'}`)
         }
