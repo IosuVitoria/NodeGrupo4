@@ -1,61 +1,60 @@
 const mongoose = require("mongoose");
 
-const Movie = require("../API/models/movie.models");
+const Market = require("../api/models/markets.models");
 
-const movies = [
+const arrayProduct = [
     {
-      title: 'The Matrix',
-      director: 'Hermanas Wachowski',
-      year: 1999,
-      genre: 'Acción',
+      name: 'Milk',
+      price: 0.95,
+      type: "Dairy",
+      nutrients: ['Vitamin A', 'Lactose'],
+      SKU: '000123',
     },
     {
-      title: 'The Matrix Reloaded',
-      director: 'Hermanas Wachowski',
-      year: 2003,
-      genre: 'Acción',
+      name: 'Beef',
+      price: 6,
+      type: "Meat",
+      nutrients: ['Vitamin B12', 'Protein'],
+      SKU: '000124',
     },
     {
-      title: 'Buscando a Nemo',
-      director: 'Andrew Stanton',
-      year: 2003,
-      genre: 'Animación',
+      name: 'Chocolate',
+      price: 1.5,
+      type: "Dairy",
+      nutrients: ['Vitamin B12', 'Manganese'],
+      SKU: '000126',
     },
     {
-      title: 'Buscando a Dory',
-      director: 'Andrew Stanton',
-      year: 2016,
-      genre: 'Animación',
+      name: 'Tomates',
+      price: 2,
+      type: "Vegetables",
+      nutrients: ['Vitamin C', 'Zinc'],
+      SKU: '000128',
     },
     {
-      title: 'Interestelar',
-      director: 'Christopher Nolan',
-      year: 2014,
-      genre: 'Ciencia ficción',
-    },
-    {
-      title: '50 primeras citas',
-      director: 'Peter Segal',
-      year: 2004,
-      genre: 'Comedia romántica',
-    },
+      name: 'Coffee',
+      price: 2.5,
+      type: "Drink",
+      nutrients: ['Vitamin D', 'Niacin'],
+      SKU: '000129',
+    }
 ];
 
 
-mongoose.connect("mongodb+srv://root:root@cluster0.v9ahybh.mongodb.net/Movies?retryWrites=true&w=majority")
+mongoose.connect(DB_URL)
 .then(async () => {
-    const allMovies = await Movie.find();
-    if(allMovies.length > 0){
-        await Movie.collection.drop();
+    const allProducts = await Product.find();
+    if(allProducts.length > 0){
+        await Product.collection.drop();
         //collection.drop() => Te vacía la colección entera.
-        console.log("Películas borradas");
+        console.log("products deleted");
     }
 })
-.catch((error) => console.log("error borrando películas", error))
+.catch((error) => console.log("error deleting products", error))
 .then(async () => {
-    const MovieMap = movies.map((movie) => new Movie(movie));
-    await Movie.insertMany(MovieMap);
-    console.log("Películas insertadas");
+    const ProductMap = arrayProduct.map((product) => new Product(product));
+    await Product.insertMany(ProductMap);
+    console.log("products inserted");
 })
-.catch((error) => console.log("error insertando películas", error))
+.catch((error) => console.log("error inserting products", error))
 .finally(() => mongoose.disconnect());
