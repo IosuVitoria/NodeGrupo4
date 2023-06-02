@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const dotenv = require('dotenv');
+dotenv.config();
 
 const Market = require("../api/models/markets.model");
 
@@ -41,7 +43,7 @@ const arrayMarket = [
 }];
 
 
-mongoose.connect(DB_URL)
+mongoose.connect(process.env.DB_URL)
 .then(async () => {
     const allMarkets = await Market.find();
     if(allMarkets.length > 0){

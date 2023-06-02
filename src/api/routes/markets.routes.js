@@ -1,8 +1,9 @@
 const express = require('express');
-const {putMarket, postMarkets, deleteMarket, getMarketByID} = require('../controllers/markets.controller');
+const {putMarket, postMarkets, deleteMarket, getMarketByID, getMarket} = require('../controllers/markets.controller');
 
 const marketsRoutes = express.Router();
 
+marketsRoutes.get('/', getMarket);
 marketsRoutes.get('/id/:id', getMarketByID);
 marketsRoutes.post('/',postMarkets);
 marketsRoutes.put('/',putMarket);

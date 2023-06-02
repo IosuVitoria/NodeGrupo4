@@ -1,8 +1,9 @@
 const express = require('express');
-const {putSupplier, postSupplier, deleteSupplier, getSupplierByID} = require('../controllers/suppliers.controller');
+const {putSupplier, postSupplier, deleteSupplier, getSupplierByID,getSupplier} = require('../controllers/suppliers.controller');
 
 const supplierRoutes = express.Router();
 
+supplierRoutes.get('/', getSupplier);
 supplierRoutes.get('/id/:id', getSupplierByID);
 supplierRoutes.post('/',postSupplier);
 supplierRoutes.put('/',putSupplier);

@@ -14,6 +14,19 @@ const getSupplierByID = async(req, res) => {
     }
 }
 
+const getSupplier = async(req, res) => {
+    try {
+        const supplier = await Supplier.find();
+        if(!supplier){
+           return res.status(404).json({message: 'Not found supplier'}); 
+        }
+        return res.status(200).json(supplier);
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+}
+
+
 // Método POST para suppliers.
 const postSupplier =  async (req, res) => {
     try {
@@ -65,4 +78,4 @@ const deleteSupplier = async (req, res) => {
     }
 };
 
-module.exports = {getSupplierByID, putSupplier, postSupplier, deleteSupplier};
+module.exports = {getSupplierByID, putSupplier, postSupplier, deleteSupplier,getSupplier};

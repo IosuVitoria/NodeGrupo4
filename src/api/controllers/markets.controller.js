@@ -14,6 +14,18 @@ const getMarketByID = async(req, res) => {
     }
 }
 
+const getMarket = async(req, res) => {
+    try {
+        const market = await Market.find();
+        if(!market){
+           return res.status(404).json({message: 'Not found market'}); 
+        }
+        return res.status(200).json(market);
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+}
+
 // Método POST para markets.
 const postMarkets =  async (req, res) => {
     try {
@@ -65,4 +77,4 @@ const putMarket = async (req, res) => {
     }
 };
 
-module.exports = {putMarket, postMarkets, deleteMarket, getMarketByID};
+module.exports = {putMarket, postMarkets, deleteMarket, getMarketByID,getMarket};
