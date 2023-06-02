@@ -1,46 +1,43 @@
 const mongoose = require("mongoose");
-const dotenv = require('dotenv');
-dotenv.config();
 
-const Product = require("../api/models/products.model");
+const Product = require('../api/models/products.model');
 
 const arrayProduct = [
     {
-      name: 'Milk',
-      price: 0.95,
-      type: "Dairy",
-      nutrients: ['Vitamin A', 'Lactose'],
-      SKU: '000123',
+      "name": 'Milk',
+      "price": 0.95,
+      "type": "Dairy",
+      "nutrients": ['Vitamin A', 'Lactose'],
+      "SKU": '000123',
     },
     {
-      name: 'Beef',
-      price: 6,
-      type: "Meat",
-      nutrients: ['Vitamin B12', 'Protein'],
-      SKU: '000124',
+      "name": 'Beef',
+      "price": 6,
+      "type": "Meat",
+      "nutrients": ['Vitamin B12', 'Protein'],
+      "SKU": '000124',
     },
     {
-      name: 'Chocolate',
-      price: 1.5,
-      type: "Dairy",
-      nutrients: ['Vitamin B12', 'Manganese'],
-      SKU: '000126',
+      "name": 'Chocolate',
+      "price": 1.5,
+      "type": "Dairy",
+      "nutrients": ['Vitamin B12', 'Manganese'],
+      "SKU": '000126',
     },
     {
-      name: 'Tomates',
-      price: 2,
-      type: "Vegetables",
-      nutrients: ['Vitamin C', 'Zinc'],
-      SKU: '000128',
+      "name": 'Tomates',
+      "price": 2,
+      "type": "Vegetables",
+      "nutrients": ['Vitamin C', 'Zinc'],
+      "SKU": '000128',
     },
     {
-      name: 'Coffee',
-      price: 2.5,
-      type: "Drink",
-      nutrients: ['Vitamin D', 'Niacin'],
-      SKU: '000129',
-    }
-];
+      "name": 'Coffee',
+      "price": 2.5,
+      "type": "Drink",
+      "nutrients": ['Vitamin D', 'Niacin'],
+      "SKU": '000129',
+    }];
 
 
 mongoose.connect(process.env.DB_URL)
