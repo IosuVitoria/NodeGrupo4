@@ -1,61 +1,26 @@
 const mongoose = require("mongoose");
 
-const Movie = require("../API/models/movie.models");
+const Supplier = require("../API/models/suppliers.model");
 
-const movies = [
-    {
-      title: 'The Matrix',
-      director: 'Hermanas Wachowski',
-      year: 1999,
-      genre: 'Acción',
-    },
-    {
-      title: 'The Matrix Reloaded',
-      director: 'Hermanas Wachowski',
-      year: 2003,
-      genre: 'Acción',
-    },
-    {
-      title: 'Buscando a Nemo',
-      director: 'Andrew Stanton',
-      year: 2003,
-      genre: 'Animación',
-    },
-    {
-      title: 'Buscando a Dory',
-      director: 'Andrew Stanton',
-      year: 2016,
-      genre: 'Animación',
-    },
-    {
-      title: 'Interestelar',
-      director: 'Christopher Nolan',
-      year: 2014,
-      genre: 'Ciencia ficción',
-    },
-    {
-      title: '50 primeras citas',
-      director: 'Peter Segal',
-      year: 2004,
-      genre: 'Comedia romántica',
-    },
+const supplier = [
+    
 ];
 
 
 mongoose.connect("mongodb+srv://root:root@cluster0.v9ahybh.mongodb.net/Movies?retryWrites=true&w=majority")
 .then(async () => {
-    const allMovies = await Movie.find();
-    if(allMovies.length > 0){
-        await Movie.collection.drop();
+    const allSuppliers = await Supplier.find();
+    if(allSuppliers.length > 0){
+        await Supplier.collection.drop();
         //collection.drop() => Te vacía la colección entera.
-        console.log("Películas borradas");
+        console.log("Suppliers erased");
     }
 })
-.catch((error) => console.log("error borrando películas", error))
+.catch((error) => console.log("erasing error", error))
 .then(async () => {
-    const MovieMap = movies.map((movie) => new Movie(movie));
-    await Movie.insertMany(MovieMap);
-    console.log("Películas insertadas");
+    const SupplierMap = supplier.map((movie) => new Supplier(supplier));
+    await Supplier.insertMany(SupplierMap);
+    console.log("Suppliers inserted");
 })
-.catch((error) => console.log("error insertando películas", error))
+.catch((error) => console.log("error inserting suppliers", error))
 .finally(() => mongoose.disconnect());
