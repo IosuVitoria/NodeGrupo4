@@ -1,6 +1,6 @@
 const { generateSign } = require("../../utils/jwt");
 const { validateEmail, validatePassword, usedEmail, usedUserName } = require("../../utils/validators");
-const User = require("../api/models/users.model");
+const User = require("../models/users.model");
 const bcrypt = require("bcrypt");
 
 
@@ -8,7 +8,8 @@ const register = async (req, res) => {
     try {
         // Create a new user instance using the provided request body
         const newUser = new User(req.body);
-
+        console.log('he llegao');
+        console.log(newUser);
         // Validate the email
         if (!validateEmail(newUser.email)) {
             return res.status(400).json({ message: "Invalid email" });

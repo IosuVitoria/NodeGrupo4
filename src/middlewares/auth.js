@@ -17,7 +17,6 @@ const isAuth = async (req, res, next) => {
         if (!authorization) {
             return res.status(401).json({ message: "Unauthorized" });
         }
-
         // Extract the token from the authorization header
         // Authorization header format: "Bearer <token>"
         const token = authorization.split(" ")[1];
