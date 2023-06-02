@@ -8,7 +8,6 @@ const productsRoutes = require('./src/api/routes/products.routes')
 const PORT = process.env.PORT;
 const app = express();
 connect();
-console.log("conectando");
 // Punto 6 del ejercicio V1.2 Terminar el CRUD de movies insertando las rutas.
 
 app.use(express.json());

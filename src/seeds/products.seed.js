@@ -41,7 +41,7 @@ const arrayProduct = [
 ];
 
 
-mongoose.connect(DB_URL)
+mongoose.connect(process.env.DB_URL)
 .then(async () => {
     const allProducts = await Product.find();
     if(allProducts.length > 0){
