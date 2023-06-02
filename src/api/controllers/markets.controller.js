@@ -33,14 +33,13 @@ const postMarkets =  async (req, res) => {
         const newMarket = new Market({
             name,
             location,
-            products: product || [],
-            suppliers: supplier || []
+            products: products || [],
+            suppliers: suppliers || []
         });
-
         const createdMarket = await newMarket.save();
         return res.status(201).json(createdMarket);
     } catch (error) {
-        return next(error);
+        return res.status(500).json(error);
     }
 };
 
@@ -62,7 +61,8 @@ const deleteMarket = async (req, res) => {
 //Método PUT para cinema.
 const putMarket = async (req, res) => {
     try {
-        const { marketId, productId } = req.body;
+        const { productId } = req.params;
+        const { marketId } = req.body;
         const updatedMarket = await Market.findByIdAndUpdate(
             marketId,
             { $push: { products: productId } },
