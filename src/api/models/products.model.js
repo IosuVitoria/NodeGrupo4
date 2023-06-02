@@ -9,6 +9,7 @@ const productSchema = new Schema (
         type: {type: String, required: true, default: "General", enum: ["General", "Dairy", "Meat", "Vegetables", "Drink", "Fish", "Fruits", "Cereals"]},
         nutrients: [{type: String, required: true}],
         SKU: {type: String, required: true},
+        image: {type: String}
     }, {
         timestamps: true
     }
