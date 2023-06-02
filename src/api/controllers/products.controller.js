@@ -1,4 +1,5 @@
 const Product = require('../models/products.model');
+const {deleteFile} = require('../../middlewares/delete.file');
 
 //Metodo Get para Product
 const getProductByID = async (req, res) =>{
@@ -30,7 +31,13 @@ const getProduct = async (req, res) =>{
 const postProduct = async (req, res) => {
     try {
         const newProduct = new Product(req.body)
+
+        if (req.file) {  // save the URL image from cloudinary to tne product image field
+            newProduct.image = req.file.path;
+        }
+
         const createProduct = await newProduct.save()
+        console.log(req.file);
         return res.status(201).json(createProduct)
     } catch (error) {
         return res.status(500).json(error)
@@ -56,9 +63,22 @@ const putProduct = async (req, res) => {
    try{
     const {id} = req.params;
     const putProduct = new Product (req.body);
+
+    if (req.file) {  // save the URL image from cloudinary to tne product image field
+        putProduct.image = req.file.path;
+    }
+
     putProduct._id = id;
     const updatedProduct = await Product.findByIdAndUpdate(id, putProduct, {new: true});
+
+    console.log(updatedProduct.image);
+    console.log(putProduct.image);
+    if(updatedProduct.image !== putProduct.image){ // delete image in cloudinary if new image is in PUT
+        deleteFile(updatedProduct.image);
+    }
+
     return res.status(200).json(updatedProduct)
+
    } catch (error){
     return res.status(500).json(error)
    }
