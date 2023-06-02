@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const supplierSchema = new Schema (
     {
         name: {type: String, required: true},
-        products: [{type: String, required: true}],
+        products: [{type: Schema.Types.ObjectId, ref: 'product'}],
         benefit: {type: Number, required: true}
     }, {
         timestamps: true

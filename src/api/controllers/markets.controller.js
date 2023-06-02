@@ -16,7 +16,7 @@ const getMarketByID = async(req, res) => {
 
 const getMarket = async(req, res) => {
     try {
-        const market = await Market.find();
+        const market = await Market.find().populate("products", "name price SKU");
         if(!market){
            return res.status(404).json({message: 'Not found market'}); 
         }

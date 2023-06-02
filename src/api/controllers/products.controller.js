@@ -58,7 +58,7 @@ const putProduct = async (req, res) => {
     const putProduct = new Product (req.body);
     putProduct._id = id;
 
-    const updatedProduct = await product.findByIdAndUpdate(id, putProduct, {new: true});
+    const updatedProduct = await Product.findByIdAndUpdate(id, putProduct, {new: true});
     return res.status(200).json(updatedProduct)
    } catch{
     return res.status(500).json(error)

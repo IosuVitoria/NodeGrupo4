@@ -16,7 +16,7 @@ const getSupplierByID = async(req, res) => {
 
 const getSupplier = async(req, res) => {
     try {
-        const supplier = await Supplier.find();
+        const supplier = await Supplier.find().populate("products", "name price SKU");
         if(!supplier){
            return res.status(404).json({message: 'Not found supplier'}); 
         }
