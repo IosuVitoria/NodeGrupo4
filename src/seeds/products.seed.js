@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
-const Movie = require("../API/models/products.models");
+const Product = require("../api/models/products.models");
 
-const arrayProducts = [
+const arrayProduct = [
     {
       name: 'Milk',
       price: 0.95,
@@ -41,20 +41,20 @@ const arrayProducts = [
 ];
 
 
-mongoose.connect("mongodb+srv://root:root@cluster0.v9ahybh.mongodb.net/Movies?retryWrites=true&w=majority")
+mongoose.connect(DB_URL)
 .then(async () => {
-    const allMovies = await Movie.find();
-    if(allMovies.length > 0){
-        await Movie.collection.drop();
+    const allProducts = await Product.find();
+    if(allProducts.length > 0){
+        await Product.collection.drop();
         //collection.drop() => Te vacía la colección entera.
-        console.log("Películas borradas");
+        console.log("products deleted");
     }
 })
-.catch((error) => console.log("error borrando películas", error))
+.catch((error) => console.log("error deleting products", error))
 .then(async () => {
-    const MovieMap = movies.map((movie) => new Movie(movie));
-    await Movie.insertMany(MovieMap);
-    console.log("Películas insertadas");
+    const ProductMap = arrayProduct.map((product) => new Product(product));
+    await Product.insertMany(ProductMap);
+    console.log("products inserted");
 })
-.catch((error) => console.log("error insertando películas", error))
+.catch((error) => console.log("error inserting products", error))
 .finally(() => mongoose.disconnect());
