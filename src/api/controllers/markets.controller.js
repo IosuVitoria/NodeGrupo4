@@ -61,12 +61,12 @@ const deleteMarket = async (req, res) => {
 //Método PUT para para introducir nuevos productos en el mercado.
 const putMarketProduct = async (req, res) => {
     try {
-        const { productId } = req.params;
+        const { id } = req.params;
         const marketId = req.body._id;
-        console.log(req.body._id);
+        console.log(req.params);
         const updatedMarket = await Market.findByIdAndUpdate(
             marketId,
-            { $push: { products: productId } },
+            { $push: { products: id } },
             { new: true }
         );
         if (!updatedMarket) {
@@ -81,11 +81,11 @@ const putMarketProduct = async (req, res) => {
 
 const putMarket = async (req, res) => {
     try{
-     const {id} = req.params;
-     const putMarket = new Market (req.body);
-     putMarket._id = id;
-     const updatedMarket = await Market.findByIdAndUpdate(id, putMarket, {new: true});
-     return res.status(200).json(updatedMarket)
+        const {id} = req.params;
+        const putMarket = new Market (req.body);
+        putMarket._id = id;
+        const updatedMarket = await Market.findByIdAndUpdate(id, putMarket, {new: true});
+        return res.status(200).json(updatedMarket)
     } catch (error){
      return res.status(500).json(error)
     }
