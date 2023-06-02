@@ -30,6 +30,13 @@ const arrayProducts = [
       type: "Vegetables",
       nutrients: ['Vitamin C', 'Zinc'],
       SKU: '000128',
+    },
+    {
+      name: 'Coffee',
+      price: 2.5,
+      type: "Drink",
+      nutrients: ['Vitamin D', 'Niacin'],
+      SKU: '000129',
     }
 ];
 
