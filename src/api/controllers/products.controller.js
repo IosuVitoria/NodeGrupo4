@@ -1,7 +1,7 @@
 const Product = require('../models/products.model');
 
 //Metodo Get para Product
-const getProducts = async (req, res) =>{
+const getProductByID = async (req, res) =>{
     try {
         const {id} = req.params;
         const product = await product.findById(id);
@@ -53,4 +53,4 @@ const putProduct = async (req, res) => {
    }
 };
 
-module.exports = {getProducts, postProduct, deleteProduct, putProduct}
+module.exports = {getProductByID, postProduct, deleteProduct, putProduct}
