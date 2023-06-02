@@ -17,11 +17,11 @@ const getSupplierByID = async(req, res) => {
 // Método POST para suppliers.
 const postSupplier =  async (req, res) => {
     try {
-        const { name, products, margin } = req.body;
+        const { name, products, benefit } = req.body;
         const newSupplier = new Supplier({
             name,
             products: product || [],
-            margin
+            benefit
         });
 
         const createdSupplier = await newSupplier.save();
