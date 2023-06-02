@@ -41,7 +41,7 @@ const postProduct = async (req, res) => {
 const deleteProduct = async(req, res) => {
     const {id} = req.params;
     try {
-        const deleteProduct = await Product.findByIdAndDelete(id);
+        const deleteProduct = await product.findByIdAndDelete(id);
         if(!deleteProduct){
             return res.status(404).json(`Message: ${'ID no reconocido'}`)
         }
@@ -58,7 +58,7 @@ const putProduct = async (req, res) => {
     const putProduct = new Product (req.body);
     putProduct._id = id;
 
-    const updatedProduct = await Product.findByIdAndUpdate(id, putProduct, {new: true});
+    const updatedProduct = await product.findByIdAndUpdate(id, putProduct, {new: true});
     return res.status(200).json(updatedProduct)
    } catch{
     return res.status(500).json(error)
