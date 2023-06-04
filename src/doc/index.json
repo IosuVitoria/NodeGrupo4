@@ -1,0 +1,348 @@
+{
+    "App": "SuperMarket",
+    "Elements": [
+        {"Products": [{
+            "Name": "Get Products",
+            "Description": "Get Products of DDBB",
+            "Endpoint": "/products",
+            "Action": "GET",
+            "Body": null,
+            "Parameters": null,
+            "Query": {
+                "limit": "number",
+                "page": "number"
+            },
+            "Response": {
+                "Info": {
+                    "NumPages": "number",
+                    "Limit": "number",
+                    "Page": "number",
+                    "nextPage": "url",
+                    "prevPage": "url"
+                },
+                "Results": ["Products"]
+            }
+        }, {
+            "Name": "Get Product By ID",
+            "Description":"Get Product of DDBB",
+            "Endpoint": "/products",
+            "Action": "GET",
+            "Body": null,
+            "Parameters": {
+                "id": "ObjectId"
+            },
+            "Query":null,
+            "Response": {
+                "_id": "ObjectId",
+                "name": "string",
+                "price": "number",
+                "type": "string",
+                "default": "string",
+                "nutrients": "string",
+                "SKU": "string",
+                "image": "string"
+            }
+        }, {
+            "Name": "Post Product",
+            "Description": "Add Product to DDBB",
+            "Endpoint": "/products",
+            "Action": "POST",
+            "Body": {
+                "name": "string",
+                "price": "number",
+                "type": "string",
+                "default": "string",
+                "nutrients": "string",
+                "SKU": "string",
+                "image": "string"
+            },
+            "Parameters": null,
+            "Query": null,
+            "Response": {
+                "_id": "ObjectId",
+                "name": "string",
+                "price": "number",
+                "type": "string",
+                "default": "string",
+                "nutrients": "string",
+                "SKU": "string",
+                "image": "string"
+            }
+        }, {
+            "Name": "Put Product",
+            "Description": "Add Product to DDBB",
+            "Endpoint": "/products/:id",
+            "Action": "PUT",
+            "Body": {
+                "name": "string",
+                "price": "number",
+                "type": "string",
+                "default": "string",
+                "nutrients": "string",
+                "SKU": "string",
+                "image": "string"
+            },
+            "Parameters": {
+                "id": "ObjectId"
+            },
+            "Query": null,
+            "Response": {
+                "_id": "ObjectId",
+                "name": "string",
+                "price": "number",
+                "type": "string",
+                "default": "string",
+                "nutrients": "string",
+                "SKU": "string",
+                "image": "string"
+            }
+        }, {
+            "Name": "Delete Product",
+            "Description": "Delete Product to DDBB",
+            "Endpoint": "/products/:id",
+            "Action": "DELETE",
+            "Body": null,
+            "Parameters": {
+                "id": "ObjectId"
+            },
+            "Query": null,
+            "Response": {
+                "_id": "ObjectId",
+                "name": "string",
+                "price": "number",
+                "type": "string",
+                "default": "string",
+                "nutrients": "string",
+                "SKU": "string",
+                "image": "string"
+            }
+        }]},
+        {"Markets": [{
+            "Name": "Get Markets",
+            "Description": "Get Markets of DDBB",
+            "Endpoint": "/markets",
+            "Action": "GET",
+            "Body": null,
+            "Parameters": null,
+            "Query": {
+                "limit": "number",
+                "page": "number"
+            },
+            "Response": {
+                "Info": {
+                    "NumPages": "number",
+                    "Limit": "number",
+                    "Page": "number",
+                    "nextPage": "url",
+                    "prevPage": "url"
+                },
+                "Results": ["Markets"]
+            }
+        }, {
+            "Name": "Get Market By ID",
+            "Description":"Get Market of DDBB",
+            "Endpoint": "/markets",
+            "Action": "GET",
+            "Body": null,
+            "Parameters": {
+                "id": "ObjectId"
+            },
+            "Query":null,
+            "Response": {
+                "_id": "ObjectId",
+                "name": "string",
+                "location": "string",
+                "products": "schema",
+                "suppliers": "schema"
+            }
+        }, {
+            "Name": "Post Market",
+            "Description": "Add Market to DDBB",
+            "Endpoint": "/markets",
+            "Action": "POST",
+            "Body": {
+                "name": "string",
+                "location": "string",
+                "products": "schema",
+                "suppliers": "schema"
+            },
+            "Parameters": null,
+            "Query": null,
+            "Response": {
+                "_id": "ObjectId",
+                "name": "string",
+                "location": "string",
+                "products": "schema",
+                "suppliers": "schema"
+            }
+        }, {
+            "Name": "Put Market",
+            "Description": "Add Market to DDBB",
+            "Endpoint": "/markets/:id",
+            "Action": "PUT",
+            "Body": {
+                "name": "string",
+                "location": "string",
+                "products": "schema",
+                "suppliers": "schema"
+            },
+            "Parameters": {
+                "id": "ObjectId"
+            },
+            "Query": null,
+            "Response": {
+                "_id": "ObjectId",
+                "name": "string",
+                "location": "string",
+                "products": "schema",
+                "suppliers": "schema"
+            }
+        }, {
+            "Name": "Delete Market",
+            "Description": "Delete Market to DDBB",
+            "Endpoint": "/markets/:id",
+            "Action": "DELETE",
+            "Body": null,
+            "Parameters": {
+                "id": "ObjectId"
+            },
+            "Query": null,
+            "Response": {
+                "_id": "ObjectId",
+                "name": "string",
+                "location": "string",
+                "products": "schema",
+                "suppliers": "schema"
+            }
+        }]},
+        {"Suppliers": [{
+            "Name": "Get Suppliers",
+            "Description": "Get Suppliers of DDBB",
+            "Endpoint": "/suppliers",
+            "Action": "GET",
+            "Body": null,
+            "Parameters": null,
+            "Query": {
+                "limit": "number",
+                "page": "number"
+            },
+            "Response": {
+                "Info": {
+                    "NumPages": "number",
+                    "Limit": "number",
+                    "Page": "number",
+                    "nextPage": "url",
+                    "prevPage": "url"
+                },
+                "Results": ["Suppliers"]
+            }
+        }, {
+            "Name": "Get Supplier By ID",
+            "Description":"Get Supplier of DDBB",
+            "Endpoint": "/suppliers",
+            "Action": "GET",
+            "Body": null,
+            "Parameters": {
+                "id": "ObjectId"
+            },
+            "Query":null,
+            "Response": {
+                "_id": "ObjectId",
+                "name": "string",
+                "products": "schema",
+                "benefit": "number"
+            }
+        }, {
+            "Name": "Post Supplier",
+            "Description": "Add Supplier to DDBB",
+            "Endpoint": "/suppliers",
+            "Action": "POST",
+            "Body": {
+                "name": "string",
+                "products": "schema",
+                "benefit": "number"
+            },
+            "Parameters": null,
+            "Query": null,
+            "Response": {
+                "_id": "ObjectId",
+                "name": "string",
+                "products": "schema",
+                "benefit": "number"
+            }
+        }, {
+            "Name": "Put Supplier",
+            "Description": "Add Supplier to DDBB",
+            "Endpoint": "/suppliers/:id",
+            "Action": "PUT",
+            "Body": {
+                "name": "string",
+                "products": "schema",
+                "benefit": "number"
+            },
+            "Parameters": {
+                "id": "ObjectId"
+            },
+            "Query": null,
+            "Response": {
+                "_id": "ObjectId",
+                "name": "string",
+                "products": "schema",
+                "benefit": "number"
+            }
+        }, {
+            "Name": "Delete Supplier",
+            "Description": "Delete Supplier to DDBB",
+            "Endpoint": "/suppliers/:id",
+            "Action": "DELETE",
+            "Body": null,
+            "Parameters": {
+                "id": "ObjectId"
+            },
+            "Query": null,
+            "Response": {
+                "_id": "ObjectId",
+                "name": "string",
+                "products": "schema",
+                "benefit": "number"
+            }
+        }]},
+        {"Users": [{
+            "Name": "Register",
+            "Description": "Add new User to DDBB",
+            "Endpoint": "/users",
+            "Action": "POST",
+            "Body": {
+                "User Name": "string",
+                "Email": "string",
+                "Password": "string",
+                "Role": "string"
+            },
+            "Parameters": null,
+            "Query": null,
+            "Response": {
+                "_id": "ObjectId",
+                "User Name": "string",
+                "Email": "string",
+                "Token": "string"
+            }
+        }, {
+            "Name": "Login",
+            "Description": "Search User in DDBB",
+            "Endpoint": "/users",
+            "Action": "LOGIN",
+            "Body": {
+                "Email": "string",
+                "Password": "string"
+            },
+            "Parameters": null,
+            "Query": null,
+            "Response": {
+                "_id": "ObjectId",
+                "User Name": "string",
+                "Email": "string",
+                "Token": "string"
+            }
+        }]}
+    ]
+}
