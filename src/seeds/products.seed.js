@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
+const dotenv = require('dotenv');
+dotenv.config();
 
-const Product = require('../api/models/products.model');
+const Product = require("../api/models/products.model");
 
 const arrayProduct = [
     {
@@ -9,6 +11,7 @@ const arrayProduct = [
       "type": "Dairy",
       "nutrients": ['Vitamin A', 'Lactose'],
       "SKU": '000123',
+      "image": "https://res.cloudinary.com/dwtvuadkp/image/upload/v1685727027/foodProducts/kvf9nuj6sctti1l4vw9h.png"
     },
     {
       "name": 'Beef',
@@ -27,7 +30,7 @@ const arrayProduct = [
     {
       "name": 'Tomates',
       "price": 2,
-      "type": "Vegetables",
+      "type": "Vegetable",
       "nutrients": ['Vitamin C', 'Zinc'],
       "SKU": '000128',
     },
@@ -44,7 +47,6 @@ const arrayProduct = [
         "SKU": "APL001",
         "nutrients": ["Vitamin C", "Dietary Fiber"],
         "type": "Fruit",
-        "image": "apple_image.jpg"
       },
       {
         "name": "Banana",
@@ -52,7 +54,6 @@ const arrayProduct = [
         "SKU": "BNN001",
         "nutrients": ["Potassium", "Vitamin B6"],
         "type": "Fruit",
-        "image": "banana_image.jpg"
       },
       {
         "name": "Carrot",
@@ -60,7 +61,6 @@ const arrayProduct = [
         "SKU": "CRT001",
         "nutrients": ["Vitamin A", "Fiber"],
         "type": "Vegetable",
-        "image": "carrot_image.jpg"
       },
       {
         "name": "Chicken Breast",
@@ -68,7 +68,6 @@ const arrayProduct = [
         "SKU": "CHB001",
         "nutrients": ["Protein", "Vitamin B12"],
         "type": "Meat",
-        "image": "chicken_breast_image.jpg"
       },
       {
         "name": "Salmon",
@@ -76,7 +75,6 @@ const arrayProduct = [
         "SKU": "SLM001",
         "nutrients": ["Omega-3 Fatty Acids", "Protein"],
         "type": "Fish",
-        "image": "salmon_image.jpg"
       },
       {
         "name": "Broccoli",
@@ -84,7 +82,6 @@ const arrayProduct = [
         "SKU": "BRC001",
         "nutrients": ["Vitamin C", "Vitamin K"],
         "type": "Vegetable",
-        "image": "broccoli_image.jpg"
       },
       {
         "name": "Yogurt",
@@ -92,7 +89,6 @@ const arrayProduct = [
         "SKU": "YGT001",
         "nutrients": ["Calcium", "Protein"],
         "type": "Dairy",
-        "image": "yogurt_image.jpg"
       },
       {
         "name": "Spinach",
@@ -100,7 +96,6 @@ const arrayProduct = [
         "SKU": "SPN001",
         "nutrients": ["Iron", "Vitamin K"],
         "type": "Vegetable",
-        "image": "spinach_image.jpg"
       },
       {
         "name": "Lettuce",
@@ -108,7 +103,6 @@ const arrayProduct = [
         "SKU": "LTT001",
         "nutrients": ["Vitamin K", "Fiber"],
         "type": "Vegetable",
-        "image": "lettuce_image.jpg"
       },
       {
         "name": "Orange",
@@ -116,15 +110,13 @@ const arrayProduct = [
         "SKU": "ORG001",
         "nutrients": ["Vitamin C", "Fiber"],
         "type": "Fruit",
-        "image": "orange_image.jpg"
       },
       {
         "name": "Almonds",
         "price": 4.99,
         "SKU": "ALM001",
         "nutrients": ["Healthy Fats", "Fiber"],
-        "type": "Nuts",
-        "image": "almonds_image.jpg"
+        "type": "Fruit",
       },
       {
         "name": "Tomato",
@@ -132,15 +124,13 @@ const arrayProduct = [
         "SKU": "TMT001",
         "nutrients": ["Vitamin C", "Lycopene"],
         "type": "Vegetable",
-        "image": "tomato_image.jpg"
       },
       {
         "name": "Peanut Butter",
         "price": 3.49,
         "SKU": "PNB001",
         "nutrients": ["Protein", "Healthy Fats"],
-        "type": "Spreads",
-        "image": "peanut_butter_image.jpg"
+        "type": "General",
       },
       {
         "name": "Cucumber",
@@ -148,7 +138,6 @@ const arrayProduct = [
         "SKU": "CDC001",
         "nutrients": ["Hydration", "Vitamin K"],
         "type": "Vegetable",
-        "image": "cucumber_image.jpg"
       },
       {
         "name": "Strawberries",
@@ -156,7 +145,6 @@ const arrayProduct = [
         "SKU": "STB001",
         "nutrients": ["Vitamin C", "Fiber"],
         "type": "Fruit",
-        "image": "strawberries_image.jpg"
       },
       {
         "name": "Cheese",
@@ -164,15 +152,14 @@ const arrayProduct = [
         "SKU": "CHS001",
         "nutrients": ["Calcium", "Protein"],
         "type": "Dairy",
-        "image": "cheese_image.jpg"
+        "image": "https://res.cloudinary.com/dwtvuadkp/image/upload/v1685725389/foodProducts/q7alhvepca86uc958n73.jpg"
       },
       {
-        "name": "Pork Chop",
+        "name": "Pork",
         "price": 6.99,
         "SKU": "PRK001",
         "nutrients": ["Protein", "Vitamin B12"],
         "type": "Meat",
-        "image": "pork_chop_image.jpg"
       },
       {
         "name": "Watermelon",
@@ -180,7 +167,6 @@ const arrayProduct = [
         "SKU": "WML001",
         "nutrients": ["Hydration", "Vitamin C"],
         "type": "Fruit",
-        "image": "watermelon_image.jpg"
       },
       {
         "name": "Potato",
@@ -188,23 +174,20 @@ const arrayProduct = [
         "SKU": "PTT001",
         "nutrients": ["Potassium", "Vitamin C"],
         "type": "Vegetable",
-        "image": "potato_image.jpg"
       },
       {
         "name": "Rice",
         "price": 2.49,
         "SKU": "RCE001",
         "nutrients": ["Carbohydrates", "Fiber"],
-        "type": "Grains",
-        "image": "rice_image.jpg"
+        "type": "Cereal",
       },
       {
         "name": "Honey",
         "price": 5.99,
         "SKU": "HNY001",
         "nutrients": ["Antioxidants", "Vitamin C"],
-        "type": "Sweeteners",
-        "image": "honey_image.jpg"
+        "type": "General",
       },
       {
         "name": "Blueberries",
@@ -212,7 +195,6 @@ const arrayProduct = [
         "SKU": "BBY001",
         "nutrients": ["Antioxidants", "Fiber"],
         "type": "Fruit",
-        "image": "blueberries_image.jpg"
       },
       {
         "name": "Avocado",
@@ -220,31 +202,27 @@ const arrayProduct = [
         "SKU": "AVC001",
         "nutrients": ["Healthy Fats", "Fiber"],
         "type": "Fruit",
-        "image": "avocado_image.jpg"
       },
       {
         "name": "Oatmeal",
         "price": 2.99,
         "SKU": "OTM001",
         "nutrients": ["Fiber", "Protein"],
-        "type": "Grains",
-        "image": "oatmeal_image.jpg"
+        "type": "Cereal",
       },
       {
         "name": "Tofu",
         "price": 2.99,
         "SKU": "TFU001",
         "nutrients": ["Protein", "Calcium"],
-        "type": "Plant-based",
-        "image": "tofu_image.jpg"
+        "type": "Vegetable",
       },
       {
         "name": "Quinoa",
         "price": 3.99,
         "SKU": "QNA001",
         "nutrients": ["Protein", "Fiber"],
-        "type": "Grains",
-        "image": "quinoa_image.jpg"
+        "type": "Cereal",
       },
       {
         "name": "Pineapple",
@@ -252,7 +230,6 @@ const arrayProduct = [
         "SKU": "PNP001",
         "nutrients": ["Vitamin C", "Manganese"],
         "type": "Fruit",
-        "image": "pineapple_image.jpg"
       },
       {
         "name": "Grapes",
@@ -260,7 +237,6 @@ const arrayProduct = [
         "SKU": "GRP001",
         "nutrients": ["Antioxidants", "Vitamin C"],
         "type": "Fruit",
-        "image": "grapes_image.jpg"
       },
       {
         "name": "Cabbage",
@@ -268,12 +244,11 @@ const arrayProduct = [
         "SKU": "CBG001",
         "nutrients": ["Vitamin C", "Fiber"],
         "type": "Vegetable",
-        "image": "cabbage_image.jpg"
       }
 
   ];
 
-
+console.log("url db ---------->", process.env.DB_URL);
 mongoose.connect(process.env.DB_URL)
 .then(async () => {
     const allProducts = await Product.find();
