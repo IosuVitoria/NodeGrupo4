@@ -2,6 +2,7 @@ const express = require('express'); // Traemos la librería express. Crea la bas
 const dotenv = require('dotenv');
 dotenv.config();
 const cloudinary = require("cloudinary").v2;
+const documentacion = require('./src/doc/index.json');
 const cors = require('cors');
 const PORT = process.env.PORT;
 
@@ -47,6 +48,11 @@ app.use("/products", isAuth, productsRoutes);
 app.use("/suppliers", suppliersRoutes);
 app.use("/markets", marketsRoutes);
 app.use("/users", userRoutes);
+
+//Acceso a documentación
+app.use('/', (req, res) => {
+  return res.json(documentacion);
+})
 
 //ponemos una ruta por si no se encontrase la ruta requerida
 app.use('*', (req, res)=>{
