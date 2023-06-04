@@ -11,14 +11,14 @@ const suppliersRoutes = require('./src/api/routes/suppliers.routes');
 const marketsRoutes = require('./src/api/routes/markets.routes');
 const userRoutes = require('./src/api/routes/users.routes');
 
-const {connect} = require('./src/utils/db')
+const { connect } = require('./src/utils/db');
 const { isAuth } = require('./src/middlewares/auth');
 
 cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_NAME,
-    api_key: process.env.CLOUDINARY_KEY,
-    api_secret: process.env.CLOUDINARY_SECRET
-  });
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET
+});
 
 const app = express();
 connect();
@@ -31,18 +31,17 @@ app.use((req, res, next) => {
   next();
 })
 
-//VAMOS A CONFIGURAR LOS CORS
+// Configuracion de CORS
 //CORS --> CORS ORIGIN RESOURCE SHARING --> Intercambio de recursos cruzados -> manera de permir el compartir recursos enntre distintos origenes
-app.use(cors(
-  {
-    origin: ["http://localhost:3000","http://localhost:4200","http://127.0.0.1:5500"],  //si sabemos origenes podemos ponerlos en un array
-    // origin: "*", // permito todas las conexiones
-    credentials: true
-  }
-))
+app.use(cors({
+  origin: ["http://localhost:3000", "http://localhost:4200", "http://127.0.0.1:5500"],
+  methods: ["GET", "POST"],
+  allowedHeaders: "Content-Type",
+  credentials: true
+}));
 
 app.use(express.json());
-app.use(express.urlencoded({extended:false}))
+app.use(express.urlencoded({ extended: false }));
 
 app.use("/products", isAuth, productsRoutes);
 app.use("/suppliers", suppliersRoutes);
@@ -54,15 +53,14 @@ app.use('/', (req, res) => {
   return res.json(documentacion);
 })
 
-//ponemos una ruta por si no se encontrase la ruta requerida
-app.use('*', (req, res)=>{
+// Ruta para manejar rutas no encontradas
+app.use('*', (req, res) => {
   res.status(404).json('Route not found');
-})
+});
 
-// errores inesperados
+// Manejo de errores inesperados
 app.use((error, req, res, next) => {
   return res.status(error.status || 500).json(`Error: ${error.message || "Unexpected error"}`);
-})
+});
 
-app.listen(PORT, ()=> console.log(`Conectado al puerto: ${PORT}`))
-
+app.listen(PORT, () => console.log(`Conectado al puerto: ${PORT}`));
