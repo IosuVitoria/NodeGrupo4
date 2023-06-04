@@ -104,3 +104,14 @@ button[type="submit"]:hover {
   right: 40px;
   z-index: -2;
 }
+
+.card__image {
+  width: 100%;
+}
+
+
+.container-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}

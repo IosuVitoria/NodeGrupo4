@@ -30,6 +30,7 @@ loginForm.addEventListener('submit', async (e) => {
       //Pasar  la respuesta en formato JSON
       const { user, token } = data; 
       // Extraer el usuario y el token de la respuesta. Después imprimimos el user y el token para verificar.
+      window.open("http://127.0.0.1:5500/public/home.html");
       
       console.log(user, token);
     } else {

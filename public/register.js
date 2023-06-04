@@ -23,7 +23,7 @@ loginForm.addEventListener('submit', async (e) => {
         // Establecer el encabezado de tipo de contenido como JSON. Revisado en: https://developer.mozilla.org/es/docs/Web/HTTP/Headers.
       },
       body: JSON.stringify({ userName,email, password, role}), 
-      // Convertir los datos de inicio de sesión en formato JSON y enviarlos en el cuerpo de la solicitud. La comparación debe de cuadrar para que se permita el acceso.
+      // Convertir los datos de inicio de sesión en formato JSON y enviarlos en el cuerpo de la solicitud. La comparación debe cuadrar para que se permita el acceso.
     });
 
     console.log("Aquí registro usuarios");

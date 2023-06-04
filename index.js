@@ -4,6 +4,7 @@ dotenv.config();
 const cloudinary = require("cloudinary").v2;
 const documentacion = require('./src/doc/index.json');
 const cors = require('cors');
+
 const PORT = process.env.PORT;
 
 const productsRoutes = require('./src/api/routes/products.routes');
@@ -49,7 +50,7 @@ app.use("/markets", marketsRoutes);
 app.use("/users", userRoutes);
 
 //Acceso a documentación
-app.use('/', (req, res) => {
+app.use('/docs', (req, res) => {
   return res.json(documentacion);
 })
 
