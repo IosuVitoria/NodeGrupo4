@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-home.css">
     <link rel="shortcut icon" href="../assets/Lidl_logo.png" type="image/x-icon">
     <script src="home.js" defer></script>
     <script src="scripts/clock.js"></script>
     <title>HOME</title>
 </head>
 <body>
-    <nav class="nav-bar">
-    NAV BAR
-    <div id="countdown"></div>
-    </nav>
+    <div class="nav-bar">
+        <div class="">Market app</div>
+        <div class="countdown" id="countdown"></div>
+
+    </div>
 
     <div class="container-parent" id="containerMarketAllSuppliers">
         <h3 class="">All Markets</h3>
@@ -28,11 +29,20 @@
 
     <div class="container-parent" id="containerProductsSuppliers">
         <h1 class="h1--white" id="nameMarket">Name Market</h1>
-        <h3 class="h3--left">Products</h3>
-        <button class="buttonAdd" id="buttonAddProduct">+Product</button>
+
+        <div class="headerContainer">
+            <h3 class="h3--left">Products</h3>
+            <button class="buttonAdd" id="buttonAddProduct">+</button>
+        </div>
+
         <div class="containerCards" id="products">
         </div> 
-        <h3 class="h3--left">Suppliers</h3>
+
+        <div class="headerContainer">
+            <h3 class="h3--left">Suppliers</h3>
+            <button class="buttonAdd" id="buttonAddSupplier">+</button>
+        </div>
+
         <div class="containerCards" id="suppliers">
         </div>
     </div>
