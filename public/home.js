@@ -173,6 +173,7 @@ const handlerShowMarketProductAndSuppliers = async (divMarket$$, resProductsJson
     // Crear un botón de retroceso
     const backButton$$ = document.createElement("button");
     backButton$$.textContent = "Back to Markets";
+    backButton$$.classList.add("buttonBack");
     backButton$$.id = "backButton";
   
     // Agregar un event listener al botón de retroceso
@@ -270,6 +271,7 @@ const handlerButtonSupplier = (resSupplierJson, marketId) => {
 }
 
 const handlerAddSupplier = async (suppplId, marketId, resProductJson) => {
+    event.target.style.color = "#53d847";
     console.log(marketId);
     const resSupplier = await fetch('http://localhost:5000/markets/idSupplier/' + suppplId,
         {
@@ -302,8 +304,10 @@ const handlerAddSupplier = async (suppplId, marketId, resProductJson) => {
 }
 
 
-const handlerAddProduct = async (prodctId, marketId, resProductJson) => {
-    console.log(marketId);
+const handlerAddProduct = async (prodctId, marketId) => {
+    console.log(event);
+    event.target.style.color = "#53d847";
+    
     const resProduct = await fetch('http://localhost:5000/markets/id/' + prodctId,
         {
             method: "PUT",
