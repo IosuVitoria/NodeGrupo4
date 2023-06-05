@@ -74,6 +74,10 @@ button[type="submit"]:hover {
   background: linear-gradient(to bottom, #004595, #005cbf);
 }
 
+.buttonAdd {
+  margin-top: 60px;
+}
+
 .alert {
   padding: 10px;
   background-color: #ffcccc;
@@ -123,4 +127,37 @@ button[type="submit"]:hover {
   height: 40px;
   background-color: rgb(61, 61, 61);
   color: white;
+}
+
+.b-modal-hidden {
+
+  display: none;
+  position: fixed;
+  top: 15%;
+  left: 33%;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  width: 33%;
+  padding: 1.3rem;
+  min-height: 250px;
+  max-height: 550px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  color: rgb(67, 67, 67);
+  border: 10px solid;
+  border-radius: 20px;
+  z-index: 2;
+  transition: all ease 1s;
+
+  &:target {
+
+      transition: all ease 1s;
+
+  }
+}
+
+.itemList {
+  margin: 2px;
 }

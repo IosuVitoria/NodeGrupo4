@@ -10,14 +10,30 @@
 </head>
 <body>
     <nav class="nav-bar">
-NAV BAR
+    NAV BAR
     </nav>
-    <button class="button" id="buttonAddProduct">+Product</button>
-    <div class="containerCards" id="markets">
-    </div>  
-    <div class="containerCards" id="products">
-    </div>  
-    <div class="containerCards" id="suppliers">
-    </div>    
+
+    <div class="containerMarketAllSuppliers">
+        <h3 class="">All Stores</h3>
+        <div class="containerCards" id="markets">
+        </div>
+        <h3 class="">All Suppliers</h3>
+        <div class="containerCards" id="AllSuppliers">
+        </div>
+    </div>
+
+
+    <div class="containerProductsSuppliers">
+        <h2 class="">Name Market</h2>
+        <h3 class="">Products</h3>
+        <button class="buttonAdd" id="buttonAddProduct">+Product</button>
+        <div class="containerCards" id="products">
+        </div> 
+        <h3 class="">Suppliers</h3>
+        <div class="containerCards" id="AllSuppliers">
+        </div>
+    </div>
+
+    <div class="b-modal-hidden" id="modalProduct"></div>
 </body>
 </html>
