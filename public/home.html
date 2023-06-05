@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-home.css">
     <link rel="shortcut icon" href="../assets/Lidl_logo.png" type="image/x-icon">
     <script src="home.js" defer></script>
     <script src="scripts/clock.js"></script>
@@ -14,6 +14,7 @@
     <nav class="nav-bar">
     NAV BAR
     <div id="countdown"></div>
+    <p id="welcomeMessage"></p>
     </nav>
 
     <div class="container-parent" id="containerMarketAllSuppliers">
@@ -28,12 +29,20 @@
 
     <div class="container-parent" id="containerProductsSuppliers">
         <h1 class="h1--white" id="nameMarket">Name Market</h1>
-        <h3 class="h3--left">Products</h3>
-        <button class="buttonAdd" id="buttonAddProduct">+Product</button>
+
+        <div class="headerContainer">
+            <h3 class="h3--left">Products</h3>
+            <button class="buttonAdd" id="buttonAddProduct">+</button>
+        </div>
+
         <div class="containerCards" id="products">
         </div> 
-        <h3 class="h3--left">Suppliers</h3>
-        <button class="buttonAdd" id="buttonAddSupplier">+Supplier</button>
+
+        <div class="headerContainer">
+            <h3 class="h3--left">Suppliers</h3>
+            <button class="buttonAdd" id="buttonAddSupplier">+</button>
+        </div>
+
         <div class="containerCards" id="suppliers">
         </div>
     </div>
@@ -41,5 +50,14 @@
     <div class="b-modal-hidden" id="modalProduct">
     </div>
     <div class="b-overlay-hidden"></div>
+    <script>
+        // Obtener el nombre de usuario y el correo electrónico del almacenamiento local
+        const username = localStorage.getItem('username');
+        const email = localStorage.getItem('email');
+      
+        // Mostrar el nombre de usuario en el elemento <p> con id "welcomeMessage"
+        const welcomeMessageElement = document.getElementById('welcomeMessage');
+        welcomeMessageElement.textContent = `Bienvenido: ${username} (${email})`;
+      </script>
 </body>
 </html>

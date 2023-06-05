@@ -8,47 +8,6 @@ body {
 
 }
 
-.container {
-  width: 400px;
-  height: 500px;
-  margin: auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 15px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.container--smaller {
-  width: 300px;
-  height: 400px;
-}
-
-.container-parent {
-  margin-top: 120px;
-}
-
-.containerCards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 15px;
-  padding: 40px 10px;
-}
-
-
-.logo {
-  width: 110px;
-  height: 110px;
-  display: block;
-  margin: -60px auto 25px;
-  border-radius: 50%;
-}
-
 h1 {
   text-align: center;
   color: #2979ff;
@@ -59,8 +18,6 @@ h1 {
   text-align: center;
   color: #ffffff;
 }
-
-
 
 h3 {
   font-size: 30px;
@@ -114,8 +71,102 @@ button[type="submit"]:hover {
   background: linear-gradient(to bottom, #004595, #005cbf);
 }
 
+.divInline {
+  display: inline;
+}
+
 .buttonAdd {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 0px;
+  padding: auto;
+  width: 50px;
+  height: 50px;
+  border: none;
+  color: white;
+  background-color: rgb(169, 201, 26);
+  font-size: 2.8rem;
+  outline: none;
+  border-radius: 50%;
+}
+
+.buttonAdd:hover {
+  cursor: pointer;
+  background-color: rgb(142, 163, 47);
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 30px;
+
+  position: fixed;
+  top: 0px;
+  z-index: 2;
+  width: 100%;
+  height: 50px;
+  background-color: rgb(61, 61, 61);
+  color: white;
+}
+
+.countdown {
+  padding-right: 50px;
+}
+
+.container {
+  width: 400px;
+  height: 500px;
+  margin: auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container--smaller {
+  width: 250px;
+  height: 300px;
+}
+
+.container--smaller:hover {
+  transform: scale(1.05, 1.05);  
+  transition: all 0.5s;
+}
+
+.container-parent {
+  margin-top: 120px;
+}
+
+.containerCards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 15px;
+  padding: 10px 20px 70px 20px;
+}
+
+.headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 40px;
+  padding: 0px 30px;
+}
+
+
+.logo {
+  width: 110px;
+  height: 110px;
+  display: block;
+  margin: -60px auto 25px;
+  border-radius: 50%;
 }
 
 .alert {
@@ -157,17 +208,6 @@ button[type="submit"]:hover {
   object-fit: contain;
   width: 100%;
   height: 60%;
-}
-
-
-.nav-bar {
-  position: fixed;
-  top: 0px;
-  z-index: 2;
-  width: 100%;
-  height: 40px;
-  background-color: rgb(61, 61, 61);
-  color: white;
 }
 
 .b-modal-hidden {
@@ -214,4 +254,27 @@ button[type="submit"]:hover {
 
 .itemList {
   margin: 2px;
+}
+
+#backButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  width: 150px;
+  height: 50px;
+  border: none;
+  color: white;
+  background-color: #ff4080a9; /* Color de fondo */
+  font-size: 18px;
+  outline: none;
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#backButton:hover {
+  cursor: pointer;
+  background-color: #f50057; /* Color de fondo al pasar el cursor */
 }

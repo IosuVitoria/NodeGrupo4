@@ -165,12 +165,55 @@ const handlerShowMarketProductAndSuppliers = async (divMarket$$, resProductsJson
         buttonAddSupplier$$.addEventListener("click", () => {
             handlerButtonSupplier(suppliersJson, market._id)
         })
-
-    }
-    catch(error) {
+    } catch(error) {
         console.error(error); 
-    }                
-};
+    } 
+  // Verificar si el botón de retroceso ya existe
+  if (!document.querySelector("#backButton")) {
+    // Crear un botón de retroceso
+    const backButton$$ = document.createElement("button");
+    backButton$$.textContent = "Back to Markets";
+    backButton$$.id = "backButton";
+  
+    // Agregar un event listener al botón de retroceso
+    backButton$$.addEventListener("click", () => {
+      // Ocultar el contenedor de productos y proveedores
+      containerProductsSuppliers$$.style.display = "none";
+      // Mostrar el contenedor de mercados y proveedores
+      containerMarketsSuppliers$$.style.display = "block";
+    });
+
+    // Adjuntar el botón de retroceso al contenedor
+    containerProductsSuppliers$$.appendChild(backButton$$);
+  }
+
+  try {
+    const resMarket = await fetch('http://localhost:5000/markets/id/' + market._id);
+    const resMarketJson = await resMarket.json();
+    //window.open("http://127.0.0.1:5500/public/market.html");
+    console.log(products);
+    containerMarketsSuppliers$$.style.display = "none";
+    for (const product of resMarketJson.products) {
+      try {
+        const resProduct = await fetch('http://localhost:5000/products/id/' + product);
+        const resProductJson = await resProduct.json();
+        console.log(resProductJson);
+        //window.open("http://127.0.0.1:5500/public/market.html");
+        printProducts(resProductJson);  
+      }
+      catch(error2) {
+        console.error(error2); 
+      }   
+    }
+    console.log(buttonAddProduct$$);
+    buttonAddProduct$$.addEventListener("click", () => {
+      handlerButtonProduct(resProductsJson, market._id)
+    })
+  }
+  catch(error) {
+    console.error(error); 
+  }                
+}
 
 const handlerButtonProduct = (resProductsJson, marketId) => {
     modal$$.innerHTML = "";
