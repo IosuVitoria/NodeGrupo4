@@ -69,7 +69,7 @@ const printMarkets = (marketsJson) => {
     for (const market of marketsJson) {
         const divMarket$$ = document.createElement("div");
         divMarket$$.innerHTML = `<div class="container">
-                                <img src=${'../assets/Lidl_sede.jpg'} alt="" class="card__image">
+                                <img src=${market.image} alt="" class="card__image">
                                 <h2 class="">${market.name}</h2>
                                 <h3 class="">${market.location}</h3>
                             </div>`;
