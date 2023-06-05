@@ -112,7 +112,7 @@ const printSuppliers = (suppliersJson) => {
         divItems.innerHTML = `<div class="container">
                                 <img src=${'../assets/Lidl_sede.jpg'} alt="" class="card__image">
                                 <h2 class="">${supplier.name}</h2>
-                                <h3 class="">${supplier.location}</h3>
+                                <h3 class="">${supplier.benefit}</h3>
                             </div>`;
         //console.log(divItems);
         //console.log(containerItems);
