@@ -46,36 +46,31 @@ const init = async () => {
 
 };
 
-const individualMarket = async(event) => {
-    console.log(event.target.className);
-    try {
-        const res = await fetch('http://localhost:5000/markets/id/' + event.target.className);
-        const res2 = await res.json();
-
-        window.open("http://127.0.0.1:5500/public/market.html");
-
-        console.log(res2);
-    }
-    catch(error2) {
-        console.error(error2); 
-    }
-}
-
 const printMarkets = (marketsJson) => {
     const containerItems = document.querySelector("#markets");
     for (const market of marketsJson) {
         const divMarket$$ = document.createElement("div");
-        divMarket$$.className = market._id;
         divMarket$$.innerHTML = `<div class="container">
                                 <img src=${'../assets/Lidl_sede.jpg'} alt="" class="card__image">
                                 <h2 class="">${market.name}</h2>
                                 <h3 class="">${market.location}</h3>
                             </div>`;
-        console.log(divMarket$$);
-        console.log(containerItems);
+        //console.log(divMarket$$);
+        //console.log(containerItems);
+        divMarket$$.setAttribute('marketID',market._id);
         containerItems.appendChild(divMarket$$); 
         
-        divMarket$$.addEventListener("click", individualMarket )
+        divMarket$$.addEventListener("click", async() => {
+            try {
+                const res = await fetch('http://localhost:5000/markets/id/' + divMarket$$.getAttribute('marketID'));
+                const res2 = await res.json();
+                //window.open("http://127.0.0.1:5500/public/market.html");
+                console.log(res2);
+            }
+            catch(error2) {
+                console.error(error2); 
+            }
+        })
     }            
 }
 
@@ -88,8 +83,8 @@ const printSuppliers = (suppliersJson) => {
                                 <h2 class="">${supplier.name}</h2>
                                 <h3 class="">${supplier.location}</h3>
                             </div>`;
-        console.log(divItems);
-        console.log(containerItems);
+        //console.log(divItems);
+        //console.log(containerItems);
         containerItems.appendChild(divItems);           
     }            
 }
