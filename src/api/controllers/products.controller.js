@@ -27,6 +27,44 @@ const getProduct = async (req, res) =>{
     }
 }
 
+//Añadir Paginación
+const getAllProducts = async (req, res) =>{
+    try {
+        //Se recogen las querys(page) y se establece el límite por página(limit)
+        let {page, limit} = req.query;
+        //Se cuenta el numero de elementos en products
+        const numProducts = await Product.countDocuments();
+        //Se establece un límite por página de 10
+        limit = limit ? parseInt(limit) || 10: 10;
+        //Se comprueba el numero máximo de páginas, ponemos un límite de 1
+        let numPages = numProducts%limit > 0 ? numProducts/limit + 1: numProducts/limit;
+        //Si no estaba establecido el límite de páginas, se establece en 1
+        page = page > numPages ? numPages : page < 1 ? 1 : parseInt(page) || 1;
+        //Se calcula el salto para intercalar los elementos
+        const skip = (page - 1) * limit;
+        const allProducts = await Product.find().skip(skip).limit(limit);
+        const response = {
+            info: {
+                numProducts: numProducts,
+                page: page,
+                limit: limit,
+                nextPage: numPages >= page +1 ? `/products?page=${page + 1}&limit=${limit}` : null,
+                previusPage: page != 1 ? `/products?page=${page - 1}&limit=${limit}` : null
+            },
+            results: allProducts
+        }
+        return res.status(200).json(response);
+
+        // const product = await Product.find();
+        // if(!product){
+        //    return res.status(404).json({message: 'Not found products'}); 
+        // }
+        // return res.status(200).json(product);
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+}
+
 //Metodo POST para Product
 const postProduct = async (req, res) => {
     try {
@@ -84,4 +122,4 @@ const putProduct = async (req, res) => {
    }
 };
 
-module.exports = {getProductByID, postProduct, deleteProduct, putProduct, getProduct}
+module.exports = {getProductByID, postProduct, deleteProduct, putProduct, getProduct, getAllProducts}
