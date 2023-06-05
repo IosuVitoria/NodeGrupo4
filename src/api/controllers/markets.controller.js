@@ -84,6 +84,30 @@ const putMarketProduct = async (req, res) => {
     }
 };
 
+const putMarketSupplier = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const marketId = req.body._id;
+
+        const duplicateMarket = await Market.find({$and: [{_id: marketId},{suppliers: {$in: [id]}}]});
+        if(duplicateMarket.length > 0) {
+            return res.status(405).json({ message: "Product already exists." });
+        }
+        const updatedMarket = await Market.findByIdAndUpdate(
+            marketId,
+            { $push: { suppliers: id } },
+            { new: true }
+        );
+        if (!updatedMarket) {
+            return res.status(404).json({ message: "Market no found." });
+        }
+        console.log("updated market -------", updatedMarket);
+        return res.status(200).json(updatedMarket);
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+};
+
 
 const putMarket = async (req, res) => {
     try{
@@ -110,4 +134,4 @@ const putMarket = async (req, res) => {
 };
  
 
-module.exports = {putMarketProduct, postMarkets, deleteMarket, getMarketByID,getMarket, putMarket};
+module.exports = {putMarketProduct, postMarkets, deleteMarket, getMarketByID,getMarket, putMarket, putMarketSupplier};
