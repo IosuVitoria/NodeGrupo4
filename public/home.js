@@ -1,6 +1,7 @@
 const containerMarkets = document.body.querySelector("#markets");
 const containerSuppliers = document.body.querySelector("#suppliers");
 const containerProducts = document.body.querySelector("#products");
+const buttonAddProduct = document.body.querySelector("#buttonAddProduct");
 
 console.log(containerMarkets);
 
@@ -52,16 +53,16 @@ const init = async () => {
 };
 
 const printProducts = (product) => {
-    const divItems = document.createElement("div");
-    divItems.innerHTML = `<div class="container">
-        <img src=${'../assets/Lidl_sede.jpg'} alt="" class="card__image">
-        <h2 class="">${product.name}</h2>
-        <h3 class="">${product.price}</h3>
-        </div>`;
+    const divItems$$ = document.createElement("div");
+    divItems$$.innerHTML = `<div class="container">
+                                <img src=${product.image} alt="" class="card__image">
+                                <h2 class="">${product.name}</h2>
+                                <h3 class="">${product.price}</h3>
+                            </div>`;
     //console.log(divItems);
     //console.log(containerItems);
-    containerProducts.appendChild(divItems);
-    
+    containerProducts.appendChild(divItems$$);
+
 }
 
 const printMarkets = (marketsJson) => {
@@ -79,23 +80,23 @@ const printMarkets = (marketsJson) => {
         
         divMarket$$.addEventListener("click", async() => {
             try {
-                const res = await fetch('http://localhost:5000/markets/id/' + divMarket$$.getAttribute('marketID'));
-                const res2 = await res.json();
+                const resMarket = await fetch('http://localhost:5000/markets/id/' + divMarket$$.getAttribute('marketID'));
+                const resMarketJson = await resMarket.json();
                 //window.open("http://127.0.0.1:5500/public/market.html");
                 console.log(products);
                 containerMarkets.style.display = "none";
                 containerSuppliers.style.display = "none";
-                for (const product of res2.products) {
+                for (const product of resMarketJson.products) {
                     try {
-                        const res3 = await fetch('http://localhost:5000/products/id/' + product);
-                        const res4 = await res3.json();
-                        console.log(res4);
+                        const resProduct = await fetch('http://localhost:5000/products/id/' + product);
+                        const resProductJson = await resProduct.json();
+                        console.log(resProductJson);
                         //window.open("http://127.0.0.1:5500/public/market.html");
-                        printProducts(res4);  
+                        printProducts(resProductJson);  
                     }
                     catch(error2) {
                         console.error(error2); 
-                    }         
+                    }   
                 }
 
             }
