@@ -88,33 +88,7 @@ const printMarkets = (marketsJson, resProductsJson) => {
         containerMarkets.appendChild(divMarket$$);
         
         divMarket$$.addEventListener("click", async() => {
-            try {
-                const resMarket = await fetch('http://localhost:5000/markets/id/' + divMarket$$.getAttribute('marketID'));
-                const resMarketJson = await resMarket.json();
-                //window.open("http://127.0.0.1:5500/public/market.html");
-                console.log(products);
-                containerMarketsSuppliers$$.style.display = "none";
-                for (const product of resMarketJson.products) {
-                    try {
-                        const resProduct = await fetch('http://localhost:5000/products/id/' + product);
-                        const resProductJson = await resProduct.json();
-                        console.log(resProductJson);
-                        //window.open("http://127.0.0.1:5500/public/market.html");
-                        printProducts(resProductJson);  
-                    }
-                    catch(error2) {
-                        console.error(error2); 
-                    }   
-                }
-                console.log(buttonAddProduct$$);
-                buttonAddProduct$$.addEventListener("click", () => {
-                    handlerButtonProduct(resProductsJson, market._id)
-                })
-
-            }
-            catch(error) {
-                console.error(error); 
-            }
+            handlerShowMarketProductAndSuppliers(divMarket$$, resProductsJson, market._id);
         })
     }            
 }
@@ -133,6 +107,36 @@ const printSuppliers = (suppliersJson) => {
         containerAllSuppliers.appendChild(divItems);           
     }            
 }
+
+const handlerShowMarketProductAndSuppliers = async (divMarket$$, resProductsJson, marketId) => {
+    try {
+        const resMarket = await fetch('http://localhost:5000/markets/id/' + marketId);
+        const resMarketJson = await resMarket.json();
+        //window.open("http://127.0.0.1:5500/public/market.html");
+        console.log(products);
+        containerMarketsSuppliers$$.style.display = "none";
+        for (const product of resMarketJson.products) {
+            try {
+                const resProduct = await fetch('http://localhost:5000/products/id/' + product);
+                const resProductJson = await resProduct.json();
+                console.log(resProductJson);
+                //window.open("http://127.0.0.1:5500/public/market.html");
+                printProducts(resProductJson);  
+            }
+            catch(error2) {
+                console.error(error2); 
+            }   
+        }
+        console.log(buttonAddProduct$$);
+        buttonAddProduct$$.addEventListener("click", () => {
+            handlerButtonProduct(resProductsJson, marketId)
+        })
+
+    }
+    catch(error) {
+        console.error(error); 
+    }                
+};
 
 const handlerButtonProduct = (resProductsJson, marketId) => {
     modal$$.style.display = "flex";
@@ -157,7 +161,7 @@ const handlerButtonProduct = (resProductsJson, marketId) => {
 
 }
 
-const handlerAddProduct = async (prodctId, marketId) => {
+const handlerAddProduct = async (prodctId, marketId, resProductJson) => {
     console.log(marketId);
     const resProduct = await fetch('http://localhost:5000/markets/id/' + prodctId,
         {
@@ -169,9 +173,22 @@ const handlerAddProduct = async (prodctId, marketId) => {
         }
         );
         console.log(resProduct);
-        //PrintAddProduct(resProductJson);  
+    const resProductJson2 = await resProduct.json();
 
-    const resProductJson = await resProduct.json();
+    // Print new product in div
+    const resProductAdded = await fetch('http://localhost:5000/products/id/' + prodctId,
+    {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    }
+    );
+    const resProductAddedJson = await resProductAdded.json();
+
+    printProducts(resProductAddedJson);
+
+
 
 
 }
