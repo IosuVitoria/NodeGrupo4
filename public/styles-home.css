@@ -256,3 +256,25 @@ button[type="submit"]:hover {
   margin: 2px;
 }
 
+#backButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  width: 150px;
+  height: 50px;
+  border: none;
+  color: white;
+  background-color: #ff4080a9; /* Color de fondo */
+  font-size: 18px;
+  outline: none;
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#backButton:hover {
+  cursor: pointer;
+  background-color: #f50057; /* Color de fondo al pasar el cursor */
+}
