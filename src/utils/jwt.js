@@ -7,7 +7,7 @@ const generateSign = (id, email) => {
         {id, email}, 
         //en este punto como segundo parametro se configura si se utiliza clave privada o publica
         process.env.JWT_KEY, 
-        {expiresIn: '1h'})
+        {expiresIn: '3h'})
 }
 
 

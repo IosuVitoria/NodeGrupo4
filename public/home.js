@@ -1,3 +1,9 @@
+const containerMarkets = document.body.querySelector("#markets");
+const containerSuppliers = document.body.querySelector("#suppliers");
+const containerProducts = document.body.querySelector("#products");
+const buttonAddProduct = document.body.querySelector("#buttonAddProduct");
+
+console.log(containerMarkets);
 
 const init = async () => {
     console.log("init home");
@@ -46,51 +52,72 @@ const init = async () => {
 
 };
 
-const individualMarket = async(event) => {
-    console.log(event.target.className);
-    try {
-        const res = await fetch('http://localhost:5000/markets/id/' + event.target.className);
-        const res2 = await res.json();
+const printProducts = (product) => {
+    const divItems$$ = document.createElement("div");
+    divItems$$.innerHTML = `<div class="container">
+                                <img src=${product.image} alt="" class="card__image">
+                                <h2 class="">${product.name}</h2>
+                                <h3 class="">${product.price}</h3>
+                            </div>`;
+    //console.log(divItems);
+    //console.log(containerItems);
+    containerProducts.appendChild(divItems$$);
 
-        window.open("http://127.0.0.1:5500/public/market.html");
-
-        console.log(res2);
-    }
-    catch(error2) {
-        console.error(error2); 
-    }
 }
 
 const printMarkets = (marketsJson) => {
-    const containerItems = document.querySelector("#markets");
     for (const market of marketsJson) {
         const divMarket$$ = document.createElement("div");
-        divMarket$$.className = market._id;
         divMarket$$.innerHTML = `<div class="container">
                                 <img src=${'../assets/Lidl_sede.jpg'} alt="" class="card__image">
                                 <h2 class="">${market.name}</h2>
                                 <h3 class="">${market.location}</h3>
                             </div>`;
-        console.log(divMarket$$);
-        console.log(containerItems);
-        containerItems.appendChild(divMarket$$); 
+        //console.log(divMarket$$);
+        //console.log(containerItems);
+        divMarket$$.setAttribute('marketID',market._id);
+        containerMarkets.appendChild(divMarket$$); 
         
-        divMarket$$.addEventListener("click", individualMarket )
+        divMarket$$.addEventListener("click", async() => {
+            try {
+                const resMarket = await fetch('http://localhost:5000/markets/id/' + divMarket$$.getAttribute('marketID'));
+                const resMarketJson = await resMarket.json();
+                //window.open("http://127.0.0.1:5500/public/market.html");
+                console.log(products);
+                containerMarkets.style.display = "none";
+                containerSuppliers.style.display = "none";
+                for (const product of resMarketJson.products) {
+                    try {
+                        const resProduct = await fetch('http://localhost:5000/products/id/' + product);
+                        const resProductJson = await resProduct.json();
+                        console.log(resProductJson);
+                        //window.open("http://127.0.0.1:5500/public/market.html");
+                        printProducts(resProductJson);  
+                    }
+                    catch(error2) {
+                        console.error(error2); 
+                    }   
+                }
+
+            }
+            catch(error) {
+                console.error(error); 
+            }
+        })
     }            
 }
 
 const printSuppliers = (suppliersJson) => {
-    const containerItems = document.querySelector("#suppliers");
     for (const supplier of suppliersJson) {
         const divItems = document.createElement("div");
         divItems.innerHTML = `<div class="container">
                                 <img src=${'../assets/Lidl_sede.jpg'} alt="" class="card__image">
                                 <h2 class="">${supplier.name}</h2>
-                                <h3 class="">${supplier.location}</h3>
+                                <h3 class="">${supplier.benefit}</h3>
                             </div>`;
-        console.log(divItems);
-        console.log(containerItems);
-        containerItems.appendChild(divItems);           
+        //console.log(divItems);
+        //console.log(containerItems);
+        containerSuppliers.appendChild(divItems);           
     }            
 }
 

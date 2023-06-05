@@ -44,7 +44,8 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/products", isAuth, productsRoutes);
+//app.use("/products", isAuth, productsRoutes);
+app.use("/products", productsRoutes);
 app.use("/suppliers", suppliersRoutes);
 app.use("/markets", marketsRoutes);
 app.use("/users", userRoutes);
