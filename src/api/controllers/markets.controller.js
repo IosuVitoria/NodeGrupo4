@@ -63,12 +63,14 @@ const putMarketProduct = async (req, res) => {
     try {
         const { id } = req.params;
         const marketId = req.body._id;
+        console.log(req.body);
         console.log(req.params);
         const updatedMarket = await Market.findByIdAndUpdate(
             marketId,
             { $push: { products: id } },
             { new: true }
         );
+        console.log("updated market -------", updatedMarket);
         if (!updatedMarket) {
             return res.status(404).json({ message: "Market no found." });
         }
