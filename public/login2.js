@@ -1,7 +1,6 @@
 const loginForm = document.getElementById('loginForm');
 const errorElement = document.getElementById('error');
-const registerElement = document.querySelector('.sign-up'); // Seleccionamos el botón con la clase "sign-up"
-
+const registerElement = document.querySelector('.sign-up');
 
 loginForm.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -18,15 +17,11 @@ loginForm.addEventListener('submit', async (e) => {
       body: JSON.stringify({ email, password }),
     });
 
-    console.log("Aquí entro");
-
     if (response.ok) {
-        const data = await response.json();
-        const { user, token } = data;
-        const infoMessage = `Login successful. User: ${user}, Token: ${token}`;
-        const encodedMessage = encodeURIComponent(infoMessage);
-        //const url = `http://127.0.0.1:5000/public/home/home.html?info=${encodedMessage}`;
-        window.open("http://127.0.0.1:5500/public/home/home.html");
+      const data = await response.json();
+      const { user, token } = data;
+      const infoMessage = `Login successful. User: ${user}, Token: ${token}`;
+      openNewPage(infoMessage);
     } else {
       const data = await response.json();
       const { message } = data;
@@ -45,9 +40,7 @@ function showError(message) {
 }
 
 function openNewPage(infoMessage) {
-    const encodedMessage = encodeURIComponent(infoMessage);
-    //const url = `http://127.0.0.1:5000/public/home/home.html?info=${encodedMessage}`;
-    window.location.href = `http://www.google.com`;
+  window.location.href = "http://127.0.0.1:5500/public/home.html";
 }
 
 registerElement.addEventListener("click", (e) => {

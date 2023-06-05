@@ -156,7 +156,7 @@ const handlerButtonProduct = (resProductsJson, marketId) => {
     overlay$$.style.display = "flex";
 
 
-    titleModal$$ = document.createElement("h3");
+    titleModal$$ = document.createElement("h2");
     titleModal$$.textContent = "Add Products to Market"
     modal$$.appendChild(titleModal$$);
 
@@ -192,23 +192,22 @@ const handlerAddProduct = async (prodctId, marketId, resProductJson) => {
         );
         console.log(resProduct);
     const resProductJson2 = await resProduct.json();
+    
+    if(resProduct.ok) {
+        // Print new product in div
+        const resProductAdded = await fetch('http://localhost:5000/products/id/' + prodctId,
+        {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }
+        );
+        const resProductAddedJson = await resProductAdded.json();
 
-    // Request data of added product to market
-    const resProductAdded = await fetch('http://localhost:5000/products/id/' + prodctId,
-    {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
+        // Print new product selected in div
+        printProducts(resProductAddedJson);
     }
-    );
-    const resProductAddedJson = await resProductAdded.json();
-
-    // Print new product selected in div
-    printProducts(resProductAddedJson);
-
-
-
 
 }
 
