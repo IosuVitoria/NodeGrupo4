@@ -137,6 +137,7 @@ const handlerShowMarketProductAndSuppliers = async (divMarket$$, resProductsJson
             try {
                 const resProduct = await fetch('http://localhost:5000/products/id/' + product);
                 const resProductJson = await resProduct.json();
+                console.log(resProductJson);
                 //console.log(resProductJson);
                 //window.open("http://127.0.0.1:5500/public/market.html");
                 printProducts(resProductJson);  
@@ -180,40 +181,16 @@ const handlerShowMarketProductAndSuppliers = async (divMarket$$, resProductsJson
     backButton$$.addEventListener("click", () => {
       // Ocultar el contenedor de productos y proveedores
       containerProductsSuppliers$$.style.display = "none";
+      containerProducts.innerHTML = '';
+      containerSuppliers.innerHTML = '';
       // Mostrar el contenedor de mercados y proveedores
       containerMarketsSuppliers$$.style.display = "block";
+
     });
 
     // Adjuntar el botón de retroceso al contenedor
     containerProductsSuppliers$$.appendChild(backButton$$);
-  }
-
-  try {
-    const resMarket = await fetch('http://localhost:5000/markets/id/' + market._id);
-    const resMarketJson = await resMarket.json();
-    //window.open("http://127.0.0.1:5500/public/market.html");
-    console.log(products);
-    containerMarketsSuppliers$$.style.display = "none";
-    for (const product of resMarketJson.products) {
-      try {
-        const resProduct = await fetch('http://localhost:5000/products/id/' + product);
-        const resProductJson = await resProduct.json();
-        console.log(resProductJson);
-        //window.open("http://127.0.0.1:5500/public/market.html");
-        printProducts(resProductJson);  
-      }
-      catch(error2) {
-        console.error(error2); 
-      }   
-    }
-    console.log(buttonAddProduct$$);
-    buttonAddProduct$$.addEventListener("click", () => {
-      handlerButtonProduct(resProductsJson, market._id)
-    })
-  }
-  catch(error) {
-    console.error(error); 
-  }                
+  }             
 }
 
 const handlerButtonProduct = (resProductsJson, marketId) => {
