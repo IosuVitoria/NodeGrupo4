@@ -62,6 +62,18 @@ const init = async () => {
 
 };
 
+const printProducts = (product) => {
+    const divItems$$ = document.createElement("div");
+    divItems$$.innerHTML = `<div class="container">
+                                <img src=${product.image} alt="" class="card__image-products">
+                                <h2 class="">${product.name}</h2>
+                                <h3 class="">${product.price}€</h3>
+                            </div>`;
+    //console.log(divItems);
+    //console.log(containerItems);
+    containerProducts.appendChild(divItems$$);
+}
+
 const printMarkets = (marketsJson, resProductsJson) => {
     for (const market of marketsJson) {
         const divMarket$$ = document.createElement("div");
@@ -74,8 +86,6 @@ const printMarkets = (marketsJson, resProductsJson) => {
         //console.log(containerItems);
         divMarket$$.setAttribute('marketID',market._id);
         containerMarkets.appendChild(divMarket$$);
-
-        allProducts = 
         
         divMarket$$.addEventListener("click", async() => {
             try {
@@ -109,26 +119,14 @@ const printMarkets = (marketsJson, resProductsJson) => {
     }            
 }
 
-const printProducts = (product) => {
-    const divItems$$ = document.createElement("div");
-    divItems$$.innerHTML = `<div class="container">
-                                <img src=${product.image} alt="" class="card__image">
-                                <h2 class="">${product.name}</h2>
-                                <h3 class="">${product.price}</h3>
-                            </div>`;
-    //console.log(divItems);
-    //console.log(containerItems);
-    containerProducts.appendChild(divItems$$);
-
-}
-
 const printSuppliers = (suppliersJson) => {
     for (const supplier of suppliersJson) {
         const divItems = document.createElement("div");
         divItems.innerHTML = `<div class="container">
                                 <img src=${supplier.image} alt="" class="card__image">
                                 <h2 class="">${supplier.name}</h2>
-                                <h3 class="">${supplier.benefit} %</h3>
+                                <h3 class="">${supplier.benefit}% Profit Margin
+                                </h3>
                             </div>`;
         //console.log(divItems);
         //console.log(containerItems);
@@ -173,7 +171,6 @@ const handlerAddProduct = async (prodctId, marketId) => {
         console.log(resProduct);
         //PrintAddProduct(resProductJson);  
 
-    
     const resProductJson = await resProduct.json();
 
 

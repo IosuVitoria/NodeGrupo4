@@ -7,7 +7,8 @@ const marketSchema = new Schema (
         name: {type: String, required: true},
         location: {type: String, required: true},
         products: [{type: Schema.Types.ObjectId, ref: 'product'}],
-        suppliers: [{type: Schema.Types.ObjectId, ref: 'supplier'}]
+        suppliers: [{type: Schema.Types.ObjectId, ref: 'supplier'}],
+        image: {type: String, required: false}
     }, {
         timestamps: true
     }
