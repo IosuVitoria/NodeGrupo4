@@ -13,9 +13,9 @@
     NAV BAR
     </nav>
 
-    <div class="containerMarketAllSuppliers">
-        <h3 class="">All Stores</h3>
-        <div class="containerCards" id="markets">
+    <div class="container-parent" id="containerMarketAllSuppliers">
+        <h3 class="">All Markets</h3>
+        <div class="containerCards" id="AllMarkets">
         </div>
         <h3 class="">All Suppliers</h3>
         <div class="containerCards" id="AllSuppliers">
@@ -23,17 +23,20 @@
     </div>
 
 
-    <div class="containerProductsSuppliers">
-        <h2 class="">Name Market</h2>
-        <h3 class="">Products</h3>
+    <div class="container-parent" id="containerProductsSuppliers">
+        <h1 class="h1--white" id="nameMarket">Name Market</h1>
+        <h3 class="h3--left">Products</h3>
         <button class="buttonAdd" id="buttonAddProduct">+Product</button>
         <div class="containerCards" id="products">
         </div> 
-        <h3 class="">Suppliers</h3>
-        <div class="containerCards" id="AllSuppliers">
+        <h3 class="h3--left">Suppliers</h3>
+        <div class="containerCards" id="suppliers">
         </div>
     </div>
 
-    <div class="b-modal-hidden" id="modalProduct"></div>
+    <div class="b-modal-hidden" id="modalProduct">
+        <h3 class="">Add a Product to Market</h3>
+    </div>
+    <div class="b-overlay-hidden"></div>
 </body>
 </html>

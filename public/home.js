@@ -1,11 +1,20 @@
-const containerMarkets = document.body.querySelector("#markets");
-const containerMarketsSuppliers$$ = document.body.querySelector(".containerMarketAllSuppliers");
+// home page
+const containerMarketsSuppliers$$ = document.body.querySelector("#containerMarketAllSuppliers");
+const containerAllMarkets = document.body.querySelector("#AllMarkets");
 const containerAllSuppliers = document.body.querySelector("#AllSuppliers");
-const containerProducts = document.body.querySelector("#products");
-const buttonAddProduct$$ = document.body.querySelector("#buttonAddProduct");
-const modal$$ = document.querySelector(".b-modal-hidden");
+const nameMarketH2$$ = document.querySelector("#nameMarket");
+console.log(nameMarketH2$$);
 
-console.log(containerMarkets);
+// market dependent page
+const containerProductsSuppliers$$ = document.body.querySelector("#containerProductsSuppliers");
+const containerProducts = document.body.querySelector("#products");
+const containerSuppliers = document.body.querySelector("#suppliers");
+containerProductsSuppliers$$.style.display = "none";
+
+const buttonAddProduct$$ = document.body.querySelector("#buttonAddProduct");
+
+const modal$$ = document.querySelector(".b-modal-hidden");
+const overlay$$ = document.querySelector(".b-overlay-hidden");
 
 const init = async () => {
     console.log("init home");
@@ -64,10 +73,10 @@ const init = async () => {
 
 const printProducts = (product) => {
     const divItems$$ = document.createElement("div");
-    divItems$$.innerHTML = `<div class="container">
+    divItems$$.innerHTML = `<div class="container container--smaller">
                                 <img src=${product.image} alt="" class="card__image-products">
                                 <h2 class="">${product.name}</h2>
-                                <h3 class="">${product.price}€</h3>
+                                <h4 class="">${product.price}€</h4>
                             </div>`;
     //console.log(divItems);
     //console.log(containerItems);
@@ -77,18 +86,18 @@ const printProducts = (product) => {
 const printMarkets = (marketsJson, resProductsJson) => {
     for (const market of marketsJson) {
         const divMarket$$ = document.createElement("div");
-        divMarket$$.innerHTML = `<div class="container">
+        divMarket$$.innerHTML = `<div class="container container--smaller">
                                 <img src=${market.image} alt="" class="card__image">
                                 <h2 class="">${market.name}</h2>
-                                <h3 class="">${market.location}</h3>
+                                <h4 class="">${market.location}</h4>
                             </div>`;
         //console.log(divMarket$$);
         //console.log(containerItems);
         divMarket$$.setAttribute('marketID',market._id);
-        containerMarkets.appendChild(divMarket$$);
+        containerAllMarkets.appendChild(divMarket$$);
         
         divMarket$$.addEventListener("click", async() => {
-            handlerShowMarketProductAndSuppliers(divMarket$$, resProductsJson, market._id);
+            handlerShowMarketProductAndSuppliers(divMarket$$, resProductsJson, market);
         })
     }            
 }
@@ -96,11 +105,11 @@ const printMarkets = (marketsJson, resProductsJson) => {
 const printSuppliers = (suppliersJson) => {
     for (const supplier of suppliersJson) {
         const divItems = document.createElement("div");
-        divItems.innerHTML = `<div class="container">
+        divItems.innerHTML = `<div class="container container--smaller">
                                 <img src=${supplier.image} alt="" class="card__image">
                                 <h2 class="">${supplier.name}</h2>
-                                <h3 class="">${supplier.benefit}% Profit Margin
-                                </h3>
+                                <h4 class="">${supplier.benefit}% Profit Margin
+                                </h4>
                             </div>`;
         //console.log(divItems);
         //console.log(containerItems);
@@ -108,9 +117,12 @@ const printSuppliers = (suppliersJson) => {
     }            
 }
 
-const handlerShowMarketProductAndSuppliers = async (divMarket$$, resProductsJson, marketId) => {
+const handlerShowMarketProductAndSuppliers = async (divMarket$$, resProductsJson, market) => {
+    containerProductsSuppliers$$.style.display = "block";
+    nameMarketH2$$.textContent = market.name;
+    
     try {
-        const resMarket = await fetch('http://localhost:5000/markets/id/' + marketId);
+        const resMarket = await fetch('http://localhost:5000/markets/id/' + market._id);
         const resMarketJson = await resMarket.json();
         //window.open("http://127.0.0.1:5500/public/market.html");
         console.log(products);
@@ -129,7 +141,7 @@ const handlerShowMarketProductAndSuppliers = async (divMarket$$, resProductsJson
         }
         console.log(buttonAddProduct$$);
         buttonAddProduct$$.addEventListener("click", () => {
-            handlerButtonProduct(resProductsJson, marketId)
+            handlerButtonProduct(resProductsJson, market._id)
         })
 
     }
@@ -139,9 +151,15 @@ const handlerShowMarketProductAndSuppliers = async (divMarket$$, resProductsJson
 };
 
 const handlerButtonProduct = (resProductsJson, marketId) => {
+    modal$$.innerHTML = "";
     modal$$.style.display = "flex";
-    console.log("button pressed");
-    console.log(resProductsJson);
+    overlay$$.style.display = "flex";
+
+
+    titleModal$$ = document.createElement("h3");
+    titleModal$$.textContent = "Add Products to Market"
+    modal$$.appendChild(titleModal$$);
+
     //modal$$.innerHTML = `<h3 class="b-gallery__label">Weight</h3>`
     for (const prodct of resProductsJson) {
         itemListProduct$$ = document.createElement("h5");
@@ -175,7 +193,7 @@ const handlerAddProduct = async (prodctId, marketId, resProductJson) => {
         console.log(resProduct);
     const resProductJson2 = await resProduct.json();
 
-    // Print new product in div
+    // Request data of added product to market
     const resProductAdded = await fetch('http://localhost:5000/products/id/' + prodctId,
     {
         method: "GET",
@@ -186,6 +204,7 @@ const handlerAddProduct = async (prodctId, marketId, resProductJson) => {
     );
     const resProductAddedJson = await resProductAdded.json();
 
+    // Print new product selected in div
     printProducts(resProductAddedJson);
 
 
@@ -193,6 +212,13 @@ const handlerAddProduct = async (prodctId, marketId, resProductJson) => {
 
 }
 
+// hide modal and overlay
+window.onclick = function(event) {
+    if (event.target == overlay$$) {
+        overlay$$.style.display = "none";
+        modal$$.style.display = "none";
+    }
+  }
 
 
 init();
