@@ -174,22 +174,21 @@ const handlerAddProduct = async (prodctId, marketId, resProductJson) => {
         );
         console.log(resProduct);
     const resProductJson2 = await resProduct.json();
+    
+    if(resProduct.ok) {
+        // Print new product in div
+        const resProductAdded = await fetch('http://localhost:5000/products/id/' + prodctId,
+        {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }
+        );
+        const resProductAddedJson = await resProductAdded.json();
 
-    // Print new product in div
-    const resProductAdded = await fetch('http://localhost:5000/products/id/' + prodctId,
-    {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
+        printProducts(resProductAddedJson);
     }
-    );
-    const resProductAddedJson = await resProductAdded.json();
-
-    printProducts(resProductAddedJson);
-
-
-
 
 }
 
