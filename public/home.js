@@ -3,7 +3,6 @@ const containerMarketsSuppliers$$ = document.body.querySelector("#containerMarke
 const containerAllMarkets = document.body.querySelector("#AllMarkets");
 const containerAllSuppliers = document.body.querySelector("#AllSuppliers");
 const nameMarketH2$$ = document.querySelector("#nameMarket");
-console.log(nameMarketH2$$);
 let suppliersJson = {};
 
 // market dependent page
