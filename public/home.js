@@ -55,9 +55,9 @@ const init = async () => {
 const printProducts = (product) => {
     const divItems$$ = document.createElement("div");
     divItems$$.innerHTML = `<div class="container">
-                                <img src=${product.image} alt="" class="card__image">
+                                <img src=${product.image} alt="" class="card__image-products">
                                 <h2 class="">${product.name}</h2>
-                                <h3 class="">${product.price}</h3>
+                                <h3 class="">${product.price}€</h3>
                             </div>`;
     //console.log(divItems);
     //console.log(containerItems);
@@ -111,7 +111,7 @@ const printSuppliers = (suppliersJson) => {
     for (const supplier of suppliersJson) {
         const divItems = document.createElement("div");
         divItems.innerHTML = `<div class="container">
-                                <img src=${'../assets/Lidl_sede.jpg'} alt="" class="card__image">
+                                <img src=${supplier.image} alt="" class="card__image">
                                 <h2 class="">${supplier.name}</h2>
                                 <h3 class="">${supplier.benefit}</h3>
                             </div>`;
