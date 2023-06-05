@@ -7,9 +7,9 @@ const marketsRoutes = express.Router();
 
 marketsRoutes.get('/', getMarket);
 marketsRoutes.get('/id/:id', getMarketByID);
-marketsRoutes.post('/',upload.single('image'), postMarkets);
-marketsRoutes.put('/id/:id',putMarketProduct);
-marketsRoutes.delete('/:id',deleteMarket);
+marketsRoutes.post('/', upload.single('image'), postMarkets);
+marketsRoutes.put('/id/:id', putMarketProduct);
+marketsRoutes.delete('/:id', deleteMarket);
 marketsRoutes.put('/:id', upload.single('image'), putMarket);
 
 module.exports = marketsRoutes;

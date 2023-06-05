@@ -47,19 +47,26 @@ const postSupplier =  async (req, res) => {
 
 //Método PUT para supplier.
 const putSupplier = async (req, res) => {
-    try {
-        const { supplierId, productId } = req.body;
-        const updatedSupplier = await Supplier.findByIdAndUpdate(
-            supplierId,
-            { $push: { products: productId } },
-            { new: true }
-        );
-        if (!updatedSupplier) {
-            return res.status(404).json({ message: "Supplier no found." });
+    try{
+        const {id} = req.params;
+        const putSupplier = new Supplier (req.body);
+
+        if (req.file) {  // save the URL image from cloudinary to tne product image field
+            putSupplier.image = req.file.path;
         }
-        return res.status(200).json(updatedSupplier);
-    } catch (error) {
-        return next(error);
+
+        putSupplier._id = id;
+        const updatedSupplier = await Supplier.findByIdAndUpdate(id, putSupplier, {new: true});
+        
+        console.log(updatedSupplier.image);
+    console.log(putSupplier.image);
+    if(updatedSupplier.image !== putSupplier.image){ // delete image in cloudinary if new image is in PUT
+        deleteFile(updatedSupplier.image);
+    }
+
+        return res.status(200).json(updatedSupplier)
+    } catch (error){
+     return res.status(500).json(error)
     }
 };
 
