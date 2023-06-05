@@ -83,8 +83,20 @@ const putMarket = async (req, res) => {
     try{
         const {id} = req.params;
         const putMarket = new Market (req.body);
+
+        if (req.file) {  // save the URL image from cloudinary to tne product image field
+            putMarket.image = req.file.path;
+        }
+
         putMarket._id = id;
         const updatedMarket = await Market.findByIdAndUpdate(id, putMarket, {new: true});
+        
+        console.log(updatedMarket.image);
+    console.log(putMarket.image);
+    if(updatedMarket.image !== putMarket.image){ // delete image in cloudinary if new image is in PUT
+        deleteFile(updatedMarket.image);
+    }
+
         return res.status(200).json(updatedMarket)
     } catch (error){
      return res.status(500).json(error)
