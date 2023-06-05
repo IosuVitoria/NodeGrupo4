@@ -46,18 +46,36 @@ const init = async () => {
 
 };
 
+const individualMarket = async(event) => {
+    console.log(event.target.className);
+    try {
+        const res = await fetch('http://localhost:5000/markets/id/' + event.target.className);
+        const res2 = await res.json();
+
+        window.open("http://127.0.0.1:5500/public/market.html");
+
+        console.log(res2);
+    }
+    catch(error2) {
+        console.error(error2); 
+    }
+}
+
 const printMarkets = (marketsJson) => {
     const containerItems = document.querySelector("#markets");
     for (const market of marketsJson) {
-        const divItems = document.createElement("div");
-        divItems.innerHTML = `<div class="container">
+        const divMarket$$ = document.createElement("div");
+        divMarket$$.className = market._id;
+        divMarket$$.innerHTML = `<div class="container">
                                 <img src=${'../assets/Lidl_sede.jpg'} alt="" class="card__image">
                                 <h2 class="">${market.name}</h2>
                                 <h3 class="">${market.location}</h3>
                             </div>`;
-        console.log(divItems);
+        console.log(divMarket$$);
         console.log(containerItems);
-        containerItems.appendChild(divItems);           
+        containerItems.appendChild(divMarket$$); 
+        
+        divMarket$$.addEventListener("click", individualMarket )
     }            
 }
 
@@ -77,3 +95,5 @@ const printSuppliers = (suppliersJson) => {
 }
 
 init();
+
+

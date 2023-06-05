@@ -117,3 +117,8 @@ button[type="submit"]:hover {
   gap: 15px;
   padding: 20px;
 }
+
+.nav-bar {
+  height: 80px;
+  color: grey;
+}
