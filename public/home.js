@@ -1,3 +1,8 @@
+const containerMarkets = document.body.querySelector("#markets");
+const containerSuppliers = document.body.querySelector("#suppliers");
+const containerProducts = document.body.querySelector("#products");
+
+console.log(containerMarkets);
 
 const init = async () => {
     console.log("init home");
@@ -46,8 +51,20 @@ const init = async () => {
 
 };
 
+const printProducts = (product) => {
+    const divItems = document.createElement("div");
+    divItems.innerHTML = `<div class="container">
+        <img src=${'../assets/Lidl_sede.jpg'} alt="" class="card__image">
+        <h2 class="">${product.name}</h2>
+        <h3 class="">${product.price}</h3>
+        </div>`;
+    //console.log(divItems);
+    //console.log(containerItems);
+    containerProducts.appendChild(divItems);
+    
+}
+
 const printMarkets = (marketsJson) => {
-    const containerItems = document.querySelector("#markets");
     for (const market of marketsJson) {
         const divMarket$$ = document.createElement("div");
         divMarket$$.innerHTML = `<div class="container">
@@ -58,24 +75,38 @@ const printMarkets = (marketsJson) => {
         //console.log(divMarket$$);
         //console.log(containerItems);
         divMarket$$.setAttribute('marketID',market._id);
-        containerItems.appendChild(divMarket$$); 
+        containerMarkets.appendChild(divMarket$$); 
         
         divMarket$$.addEventListener("click", async() => {
             try {
                 const res = await fetch('http://localhost:5000/markets/id/' + divMarket$$.getAttribute('marketID'));
                 const res2 = await res.json();
                 //window.open("http://127.0.0.1:5500/public/market.html");
-                console.log(res2);
+                console.log(products);
+                containerMarkets.style.display = "none";
+                containerSuppliers.style.display = "none";
+                for (const product of res2.products) {
+                    try {
+                        const res3 = await fetch('http://localhost:5000/products/id/' + product);
+                        const res4 = await res3.json();
+                        console.log(res4);
+                        //window.open("http://127.0.0.1:5500/public/market.html");
+                        printProducts(res4);  
+                    }
+                    catch(error2) {
+                        console.error(error2); 
+                    }         
+                }
+
             }
-            catch(error2) {
-                console.error(error2); 
+            catch(error) {
+                console.error(error); 
             }
         })
     }            
 }
 
 const printSuppliers = (suppliersJson) => {
-    const containerItems = document.querySelector("#suppliers");
     for (const supplier of suppliersJson) {
         const divItems = document.createElement("div");
         divItems.innerHTML = `<div class="container">
@@ -85,7 +116,7 @@ const printSuppliers = (suppliersJson) => {
                             </div>`;
         //console.log(divItems);
         //console.log(containerItems);
-        containerItems.appendChild(divItems);           
+        containerSuppliers.appendChild(divItems);           
     }            
 }
 
