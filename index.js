@@ -37,15 +37,15 @@ app.use((req, res, next) => {
 app.use(cors({
   origin: ["http://localhost:3000", "http://localhost:4200", "http://127.0.0.1:5500"],
   methods: ["GET", "POST", "PUT"],
-  allowedHeaders: "Content-Type",
+  allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
 }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-//app.use("/products", isAuth, productsRoutes);
-app.use("/products", productsRoutes);
+app.use("/products", isAuth, productsRoutes);
+//app.use("/products", productsRoutes);
 app.use("/suppliers", suppliersRoutes);
 app.use("/markets", marketsRoutes);
 app.use("/users", userRoutes);

@@ -25,6 +25,7 @@ loginForm.addEventListener('submit', async (e) => {
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('username', userName);
       localStorage.setItem('email', email);
+      localStorage.setItem('token', token);
       
       const infoMessage = `Login successful. User: ${user}, Token: ${token}`;
       openNewPage(infoMessage);

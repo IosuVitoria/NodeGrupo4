@@ -16,24 +16,29 @@ const buttonAddSupplier$$ = document.body.querySelector("#buttonAddSupplier");
 
 const modal$$ = document.querySelector(".b-modal-hidden");
 const overlay$$ = document.querySelector(".b-overlay-hidden");
+const token = localStorage.getItem('token');
+
 
 const init = async () => {
     console.log("init home");
+    console.log(token);
 
     // get all products
     const resProducts = await fetch("http://localhost:5000/products",
         {
-        // Realizar una solicitud POST a la ruta de inicio de sesión. 
+        // Realizar una solicitud GET a la ruta de inicio de sesión. 
         // Esta debe cuadrar con el tipo de solicitud preprogramada en las rutas.
         method: "GET",
         headers: {
             "Content-Type": "application/json",
+            'Authorization': 'Bearer ' + token 
+            }
             // Establecer el encabezado de tipo de contenido como JSON. 
             // Revisado en: https://developer.mozilla.org/es/docs/Web/HTTP/Headers.
-        },
-        });
+        }
+        );
     const resProductsJson = await resProducts.json();
-    console.log("resProductsJson -----------", resProductsJson);
+    //console.log("resProductsJson -----------", resProductsJson);
 
     
     const res = await fetch("http://localhost:5000/markets",
@@ -47,7 +52,7 @@ const init = async () => {
     let marketsJson = {};
     if (res.ok) {
         marketsJson = await res.json();
-        console.log(marketsJson);
+        // console.log(marketsJson);
         printMarkets(marketsJson, resProductsJson)
     } else {
         console.log("error GET markets");
@@ -98,7 +103,7 @@ const printMarkets = (marketsJson, resProductsJson) => {
         divMarket$$.setAttribute('marketID',market._id);
         containerAllMarkets.appendChild(divMarket$$);
         
-        divMarket$$.addEventListener("click", async() => {
+        divMarket$$.addEventListener("click", async () => {
             handlerShowMarketProductAndSuppliers(divMarket$$, resProductsJson, market);
         })
     }            
@@ -127,14 +132,28 @@ const handlerShowMarketProductAndSuppliers = async (divMarket$$, resProductsJson
     nameMarketH2$$.textContent = market.name;
     
     try {
-        const resMarket = await fetch('http://localhost:5000/markets/id/' + market._id);
+        const resMarket = await fetch('http://localhost:5000/markets/id/' + market._id,
+            {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            });
+
         const resMarketJson = await resMarket.json();
         //window.open("http://127.0.0.1:5500/public/market.html");
         //console.log(products);
         containerMarketsSuppliers$$.style.display = "none";
         for (const product of resMarketJson.products) {
             try {
-                const resProduct = await fetch('http://localhost:5000/products/id/' + product);
+                const resProduct = await fetch('http://localhost:5000/products/id/' + product,
+                    {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        'Authorization': 'Bearer ' + token 
+                    },
+                    });
                 const resProductJson = await resProduct.json();
                 console.log(resProductJson);
                 //console.log(resProductJson);
@@ -303,6 +322,7 @@ const handlerAddProduct = async (prodctId, marketId) => {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": "Bearer" + token
             },
         }
         );
