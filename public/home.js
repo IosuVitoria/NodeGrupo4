@@ -321,7 +321,7 @@ const handlerAddProduct = async (prodctId, marketId) => {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer" + token
+                    "Authorization": "Bearer " + token
                 },
             }
             );
