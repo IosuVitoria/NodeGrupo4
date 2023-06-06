@@ -20,13 +20,15 @@ loginForm.addEventListener('submit', async (e) => {
     if (response.ok) {
       const data = await response.json();
       const { user, token } = data;
-      const { userName } = user; 
+      const { userName } = user;
+      alert(token); 
       
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('username', userName);
       localStorage.setItem('email', email);
+      localStorage.setItem('token', token);
       
-      const infoMessage = `Login successful. User: ${user}, Token: ${token}`;
+      const infoMessage = `Login successful. User: ${userName}, Token: ${token}`;
       openNewPage(infoMessage);
     } else {
       const data = await response.json();
@@ -46,6 +48,7 @@ function showError(message) {
 }
 
 function openNewPage(infoMessage) {
+  alert(infoMessage);
   window.location.href = "http://127.0.0.1:5500/public/home.html";
 }
 
