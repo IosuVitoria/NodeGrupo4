@@ -12,6 +12,7 @@ const isAuth = async (req, res, next) => {
     try {
         // Get the authorization header from the request
         const authorization = req.headers.authorization;
+        console.log("authorization token --------", authorization);
 
         // Check if the authorization header is missing
         if (!authorization) {
