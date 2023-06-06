@@ -104,7 +104,7 @@ const printMarkets = (marketsJson, resProductsJson) => {
         containerAllMarkets.appendChild(divMarket$$);
         
         divMarket$$.addEventListener("click", async () => {
-            handlerShowMarketProductAndSuppliers(divMarket$$, resProductsJson, market);
+            handlerShowMarketProductAndSuppliers( resProductsJson, market);
         })
     }            
 }
@@ -127,7 +127,7 @@ const printSuppliers = (supplierJson, all) => {
     }         
 }
 
-const handlerShowMarketProductAndSuppliers = async (divMarket$$, resProductsJson, market) => {
+const handlerShowMarketProductAndSuppliers = async (resProductsJson, market) => {
     containerProductsSuppliers$$.style.display = "block";
     nameMarketH2$$.textContent = market.name;
     
@@ -265,7 +265,7 @@ const handlerButtonSupplier = (resSupplierJson, marketId) => {
     }
 }
 
-const handlerAddSupplier = async (suppplId, marketId, resProductJson) => {
+const handlerAddSupplier = async (suppplId, marketId) => {
     event.target.style.color = "#53d847";
     console.log(marketId);
     const resSupplier = await fetch('http://localhost:5000/markets/idSupplier/' + suppplId,
@@ -300,7 +300,6 @@ const handlerAddSupplier = async (suppplId, marketId, resProductJson) => {
 
 
 const handlerAddProduct = async (prodctId, marketId) => {
-    console.log(event);
     event.target.style.color = "#53d847";
     
     const resProduct = await fetch('http://localhost:5000/markets/id/' + prodctId,
@@ -312,24 +311,29 @@ const handlerAddProduct = async (prodctId, marketId) => {
             body: JSON.stringify({ _id: marketId })
         }
         );
-        console.log(resProduct);
-    const resProductJson2 = await resProduct.json();
     
     if(resProduct.ok) {
-        // Print new product in div
-        const resProductAdded = await fetch('http://localhost:5000/products/id/' + prodctId,
-        {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer" + token
-            },
-        }
-        );
-        const resProductAddedJson = await resProductAdded.json();
 
-        // Print new product selected in div
-        printProducts(resProductAddedJson);
+        try {
+            // GET new product from db
+            const resProductAdded = await fetch('http://localhost:5000/products/id/' + prodctId,
+            {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer" + token
+                },
+            }
+            );
+            const resProductAddedJson = await resProductAdded.json();
+            console.log("resProductAddedJson-----", resProductAddedJson);
+
+            // Print new product selected in div
+            printProducts(resProductAddedJson);            
+        } catch (error) {
+            console.log(error);
+        }
+
     }
 
 }
